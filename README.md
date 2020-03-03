@@ -1,5 +1,5 @@
-# Modwana
-cross platform web blog app based on C# and .NET Core 3.1 that, can use the followings databases
+## Modwana
+Cross platform web blog app based on C# and .NET Core 3.1 that, can use the followings databases
 * SqlServer
 * Postgress
 * Sqlite
@@ -10,7 +10,7 @@ And works on
 * Linux
 * Mac
 
-# Architecture 
+## Architecture 
 Domain Driver Design Architecture with the followings designs and concepts
 
 * Repository Pattern
