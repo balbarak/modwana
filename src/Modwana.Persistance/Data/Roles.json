@@ -1,0 +1,22 @@
+﻿[
+  {
+    "Id": "Modwana.ADMIN",
+    "Name": "Modwana.ADMIN",
+    "NormalizedName": "Modwana.ADMIN",
+    "ConcurrencyStamp": "C7A7B5F8-1D25-4A99-936C-AA1C83B9CF41",
+    "Description": {
+      "Arabic": "مدير النظام",
+      "English": "System Admin"
+    }
+  },
+  {
+    "Id": "Modwana.USER",
+    "Name": "Modwana.USER",
+    "NormalizedName": "Modwana.USER",
+    "ConcurrencyStamp": "C7A7B5F8-1D25-4A99-936C-AA1C83B9CF42",
+    "Description": {
+      "Arabic": "مستفيد",
+      "English": "Client"
+    }
+  }
+]
