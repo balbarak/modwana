@@ -66,7 +66,7 @@ namespace Modwana.Application.Services
 
             user = user.Update(entity);
 
-            RemoveUserRoles(user, userManager);
+            await RemoveUserRoles(user, userManager);
 
             var result = await userManager.UpdateAsync(user);
 
@@ -83,11 +83,11 @@ namespace Modwana.Application.Services
 
         public List<Role> GetRoles() => _repository.Get<Role>().ToList();
         
-        private void RemoveUserRoles(User user, ModwanaUserManager userManager)
+        private async Task RemoveUserRoles(User user, ModwanaUserManager userManager)
         {
-            var exisitRoles = userManager.GetRolesAsync(user).GetAwaiter().GetResult();
+            var exisitRoles = await userManager.GetRolesAsync(user);
 
-            userManager.RemoveFromRolesAsync(user, exisitRoles).GetAwaiter().GetResult();
+            await userManager.RemoveFromRolesAsync(user, exisitRoles);
         }
 
         private ModwanaUserManager GetUserManager()

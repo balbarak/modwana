@@ -7,10 +7,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Modwana.Persistance.Repositories
 {
-    public class GenericRepository
+    public class GenericRepository : IGenericRepository
     {
         internal ModwanaDbContext _context;
 
@@ -18,31 +19,8 @@ namespace Modwana.Persistance.Repositories
 
         public GenericRepository(ModwanaDbContext context)
         {
-            this._context = context;
+            _context = context;
 
-        }
-
-        public virtual List<TEntity> Create<TEntity>(List<TEntity> entities) where TEntity : class, IBaseEntity
-        {
-            ModwanaDbContext context = _context ?? new ModwanaDbContext();
-
-            var dbSet = context.Set<TEntity>();
-
-            foreach (var entity in entities)
-            {
-                if (entity is AuditableEntity)
-                    (entity as AuditableEntity).InsertAudit();
-            }
-
-            dbSet.AddRange(entities);
-
-            if (_context == null)
-            {
-                context.SaveChanges();
-                context.Dispose();
-            }
-
-            return entities;
         }
 
         public virtual TEntity Create<TEntity>(TEntity entity) where TEntity : class, IBaseEntity
@@ -60,6 +38,26 @@ namespace Modwana.Persistance.Repositories
             {
                 context.SaveChanges();
                 context.Dispose();
+            }
+
+            return entity;
+        }
+
+        public virtual async Task<TEntity> CreateAsync<TEntity>(TEntity entity) where TEntity : class, IBaseEntity
+        {
+            ModwanaDbContext context = _context ?? new ModwanaDbContext();
+
+            var dbSet = context.Set<TEntity>();
+
+            if (entity is AuditableEntity auditable)
+                auditable.InsertAudit();
+
+            await dbSet.AddAsync(entity);
+
+            if (_context == null)
+            {
+                await context.SaveChangesAsync();
+                await context.DisposeAsync();
             }
 
             return entity;
@@ -85,6 +83,24 @@ namespace Modwana.Persistance.Repositories
             return entityToUpdate;
         }
 
+        public virtual async Task<TEntity> UpdateAsync<TEntity>(TEntity entityToUpdate) where TEntity : class, IBaseEntity
+        {
+            ModwanaDbContext context = _context ?? new ModwanaDbContext();
+
+            if (entityToUpdate is AuditableEntity auditableEntity)
+                auditableEntity.UpdateAudit();
+
+            context.Update(entityToUpdate);
+
+            if (_context == null)
+            {
+                await context.SaveChangesAsync();
+                await context.DisposeAsync();
+            }
+
+            return entityToUpdate;
+        }
+
         public virtual void Delete<TEntity>(string id) where TEntity : class, IBaseEntity
         {
             ModwanaDbContext context = _context ?? new ModwanaDbContext();
@@ -102,18 +118,20 @@ namespace Modwana.Persistance.Repositories
             }
         }
 
-        public virtual void Delete<TEntity>(TEntity entityToDelete) where TEntity : class, IBaseEntity
+        public virtual async Task DeleteAsync<TEntity>(string id) where TEntity : class, IBaseEntity
         {
             ModwanaDbContext context = _context ?? new ModwanaDbContext();
 
             var dbSet = context.Set<TEntity>();
 
-            dbSet.Remove(entityToDelete);
+            var found = await dbSet.FindAsync(id);
+
+            dbSet.Remove(found);
 
             if (_context == null)
             {
-                context.SaveChanges();
-                context.Dispose();
+                await context.SaveChangesAsync();
+                await context.DisposeAsync();
             }
         }
 
@@ -133,7 +151,23 @@ namespace Modwana.Persistance.Repositories
             return count;
         }
 
-        public virtual int Count<TEntity>(SearchCriteria<TEntity> search) where TEntity : class, IBaseEntity
+        public virtual async Task<int> CountAsync<TEntity>() where TEntity : class, IBaseEntity
+        {
+            ModwanaDbContext context = _context ?? new ModwanaDbContext();
+
+            var dbSet = context.Set<TEntity>();
+
+            int count;
+
+            count = await dbSet.CountAsync();
+
+            if (_context == null)
+                await context.DisposeAsync();
+
+            return count;
+        }
+
+        public virtual async Task<int> CountAsync<TEntity>(SearchCriteria<TEntity> search) where TEntity : class, IBaseEntity
         {
             ModwanaDbContext context = _context ?? new ModwanaDbContext();
 
@@ -141,17 +175,15 @@ namespace Modwana.Persistance.Repositories
 
             IQueryable<TEntity> query = dbSet;
 
-            int count = 0;
-
             if (search.FilterExpression != null)
             {
                 query = query.Where(search.FilterExpression);
             }
 
-            count = query.Count();
+            int count = await query.CountAsync();
 
             if (_context == null)
-                context.Dispose();
+                await context.DisposeAsync();
 
             return count;
         }
@@ -172,6 +204,24 @@ namespace Modwana.Persistance.Repositories
 
             if (_context == null)
                 context.Dispose();
+
+            return count;
+        }
+
+        public virtual async Task<int> CountAsync<TEntity>(Expression<Func<TEntity, bool>> filter) where TEntity : class, IBaseEntity
+        {
+            ModwanaDbContext context = _context ?? new ModwanaDbContext();
+
+            var dbSet = context.Set<TEntity>();
+
+            IQueryable<TEntity> query = dbSet;
+
+            query = query.Where(filter);
+
+            var count = await query.CountAsync();
+
+            if (_context == null)
+                await context.DisposeAsync();
 
             return count;
         }
@@ -216,6 +266,45 @@ namespace Modwana.Persistance.Repositories
 
         }
 
+        public virtual async Task<SearchResult<TEntity>> SearchAsync<TEntity>(SearchCriteria<TEntity> searchCriteria, params string[] includes) where TEntity : class, IBaseEntity
+        {
+            ModwanaDbContext context = _context ?? new ModwanaDbContext();
+
+            var dbSet = context.Set<TEntity>();
+
+            IQueryable<TEntity> query = dbSet;
+
+            if (searchCriteria.FilterExpression != null)
+            {
+                query = query.Where(searchCriteria.FilterExpression);
+            }
+
+            foreach (var includeProperty in includes)
+            {
+                query = query.Include(includeProperty);
+            }
+
+            if (searchCriteria.SortExpression != null)
+            {
+                query = searchCriteria.SortExpression(query);
+            }
+
+            SearchResult<TEntity> result = new SearchResult<TEntity>(searchCriteria)
+            {
+                TotalResultsCount = await query.CountAsync(),
+            };
+
+            query = query.Skip(searchCriteria.StartIndex).Take(searchCriteria.PageSize);
+
+            result.Result = await query.ToListAsync();
+
+            if (_context == null)
+                await context.DisposeAsync();
+
+            return result;
+
+        }
+
         public virtual TEntity GetById<TEntity>(string id, params string[] includes) where TEntity : class, IBaseEntity
         {
             ModwanaDbContext context = _context ?? new ModwanaDbContext();
@@ -233,6 +322,28 @@ namespace Modwana.Persistance.Repositories
 
             if (_context == null)
                 context.Dispose();
+
+            return entity;
+
+        }
+
+        public virtual async Task<TEntity> GetByIdAsync<TEntity>(string id, params string[] includes) where TEntity : class, IBaseEntity
+        {
+            ModwanaDbContext context = _context ?? new ModwanaDbContext();
+
+            var dbSet = context.Set<TEntity>();
+
+            IQueryable<TEntity> query = dbSet;
+
+            foreach (var includeProperty in includes)
+            {
+                query = query.Include(includeProperty);
+            }
+
+            var entity = await query.Where(a => a.Id == id).FirstOrDefaultAsync();
+
+            if (_context == null)
+                await context.DisposeAsync();
 
             return entity;
 
@@ -279,18 +390,50 @@ namespace Modwana.Persistance.Repositories
             return result;
         }
 
-        public void RemoveRoles(string userId)
+        public virtual async Task<IEnumerable<TEntity>> GetAsync<TEntity>(
+         Expression<Func<TEntity, bool>> filter = null,
+         Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
+         string[] includeProperties = null, int? maxSize = null) where TEntity : class, IBaseEntity
         {
-            ModwanaDbContext context = new ModwanaDbContext();
+            ModwanaDbContext context = _context ?? new ModwanaDbContext();
 
-            var roles = context.UserRoles.Where(a => a.UserId == userId).ToList();
+            var dbSet = context.Set<TEntity>();
 
-            foreach (var item in roles)
+            IQueryable<TEntity> query = dbSet;
+
+            if (filter != null)
             {
-                context.UserRoles.Remove(item);
+                query = query.Where(filter);
             }
 
-            context.SaveChanges();
+            if (includeProperties != null)
+            {
+                foreach (var includeProperty in includeProperties)
+                {
+                    query = query.Include(includeProperty);
+                }
+            }
+
+            if (orderBy != null)
+            {
+                query = orderBy(query);
+            }
+
+            if (maxSize.HasValue)
+                query = query.Take(maxSize.Value);
+
+
+            var result = await query.ToListAsync();
+
+            if (_context == null)
+                await context.DisposeAsync();
+
+            return result;
+        }
+
+        public ValueTask DisposeAsync()
+        {
+            throw new NotImplementedException();
         }
     }
 }

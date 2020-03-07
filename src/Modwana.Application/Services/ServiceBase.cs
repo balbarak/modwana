@@ -9,25 +9,13 @@ namespace Modwana.Application.Services
 {
     public class ServiceBase<TService> where TService : class, new()
     {
-        private static Lazy<TService> _instance = new Lazy<TService>(() => new TService());
-
-        public static TService Instance
-        {
-            get { return _instance.Value; }
-        }
-
         protected internal GenericRepository _repository;
 
         protected string[] Includes { get; set; }
         
         protected ServiceBase()
         {
-            this._repository = new GenericRepository();
-        }
-
-        static ServiceBase()
-        {
-
+            _repository = new GenericRepository();
         }
 
         public void ValidateEntity(object entity)
