@@ -433,7 +433,7 @@ namespace Modwana.Persistance.Repositories
 
         public ValueTask DisposeAsync()
         {
-            throw new NotImplementedException();
+
         }
     }
 }
