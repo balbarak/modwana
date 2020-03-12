@@ -1,4 +1,5 @@
 ﻿using Modwana.Core.Exceptions;
+using Modwana.Core.Interfaces;
 using Modwana.Persistance.Repositories;
 using System;
 using System.Collections.Generic;
@@ -7,15 +8,15 @@ using System.Text;
 
 namespace Modwana.Application.Services
 {
-    public class ServiceBase<TService> where TService : class, new()
+    public class ServiceBase
     {
-        protected internal GenericRepository _repository;
+        protected internal IGenericRepository _repository;
 
         protected string[] Includes { get; set; }
         
-        protected ServiceBase()
+        protected ServiceBase(IGenericRepository repository)
         {
-            _repository = new GenericRepository();
+            _repository = repository;   
         }
 
         public void ValidateEntity(object entity)

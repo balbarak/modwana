@@ -10,12 +10,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Modwana.Core.Interfaces;
 
 namespace Modwana.Application.Services
 {
-    public class UserService : ServiceBase<UserService>
+    public class UserService : ServiceBase
     {
-        public UserService()
+        public UserService(IGenericRepository repository) : base(repository)
         {
             Includes = new[]
             {
@@ -38,9 +39,11 @@ namespace Modwana.Application.Services
             return entity;
         }
 
-        public User GetById(string id)
+        public async Task<User> GetById(string id)
         {
-            return _repository.Get<User>(a => a.Id == id, includeProperties: Includes).FirstOrDefault();
+            var result =  await _repository.GetAsync<User>(a => a.Id == id, includeProperties: Includes);
+
+            return result.FirstOrDefault();
         }
 
         public async Task Delete(string id)
@@ -76,13 +79,11 @@ namespace Modwana.Application.Services
             return entity;
         }
         
-        public SearchResult<User> Search(SearchCriteria<User> search)
+        public async Task<SearchResult<User>> Search(SearchCriteria<User> search)
         {
-            return _repository.Search(search);
+            return await _repository.SearchAsync(search);
         }
 
-        public List<Role> GetRoles() => _repository.Get<Role>().ToList();
-        
         private async Task RemoveUserRoles(User user, ModwanaUserManager userManager)
         {
             var exisitRoles = await userManager.GetRolesAsync(user);
