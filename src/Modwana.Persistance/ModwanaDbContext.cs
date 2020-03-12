@@ -16,11 +16,16 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Options;
 
 namespace Modwana.Persistance
 {
     public class ModwanaDbContext : IdentityDbContext<User, Role, string>
     {
+
+        public AppSettings Settings => ServiceLocator.Current.GetService<IOptions<AppSettings>>()?.Value;
+
+        public DbSet<Blog> Blogs { get; set; }
 
 
         public ModwanaDbContext()
@@ -37,10 +42,30 @@ namespace Modwana.Persistance
         {
             if (optionsBuilder.IsConfigured)
                 return;
-            
+
             var connectionString = AppSettings.Configuration.GetConnectionString("DefaultConnection");
 
-            optionsBuilder.UseSqlServer(connectionString);
+            switch (Settings.DatabaseType)
+            {
+                case DatabaseType.Sqlite:
+
+                    if (string.IsNullOrWhiteSpace(Settings.SqliteFilePath))
+                        throw new ArgumentNullException($"The value of ({nameof(Settings.SqliteFilePath)}) in app settings cannot be null when use Sqlite");
+
+                    optionsBuilder.UseSqlite($"Filename={Settings.SqliteFilePath}");
+
+                    break;
+                case DatabaseType.Postgress:
+                    break;
+
+                case DatabaseType.MSSQL:
+
+                    optionsBuilder.UseSqlServer(connectionString);
+
+                    break;
+                default:
+                    break;
+            }
 
             base.OnConfiguring(optionsBuilder);
 

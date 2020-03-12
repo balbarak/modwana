@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Modwana.Application;
+using Modwana.Core;
 
 namespace Modwana.Web
 {
@@ -15,6 +17,8 @@ namespace Modwana.Web
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+
+            AppSettings.Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
@@ -22,10 +26,14 @@ namespace Modwana.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
+
+            ModwanaApp.Init(services,Configuration);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            //app.ApplicationServices
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -34,6 +42,7 @@ namespace Modwana.Web
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
             app.UseStaticFiles();
 
             app.UseRouting();

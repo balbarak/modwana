@@ -8,25 +8,18 @@ namespace Modwana.Persistance.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Countries",
+                name: "Blogs",
                 columns: table => new
                 {
-                    Id = table.Column<string>(nullable: false),
-                    CodeTwo = table.Column<string>(nullable: true),
-                    NameArabic = table.Column<string>(nullable: false),
-                    NameEnglish = table.Column<string>(nullable: false),
-                    PhoneCode = table.Column<string>(nullable: true),
-                    IsActive = table.Column<bool>(nullable: false),
-                    CapitalEnglish = table.Column<string>(nullable: true),
-                    CapitalArabic = table.Column<string>(nullable: true),
-                    Population = table.Column<int>(nullable: true),
-                    Latitude = table.Column<float>(nullable: true),
-                    Longtitude = table.Column<float>(nullable: true),
-                    Area = table.Column<double>(nullable: true)
+                    Id = table.Column<string>(maxLength: 128, nullable: false),
+                    Title = table.Column<string>(maxLength: 2048, nullable: true),
+                    Body = table.Column<string>(nullable: true),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    PublishDate = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Countries", x => x.Id);
+                    table.PrimaryKey("PK_Blogs", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -72,41 +65,11 @@ namespace Modwana.Persistance.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Addresses",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false),
-                    CreatedDate = table.Column<DateTime>(nullable: false),
-                    ModifiedDate = table.Column<DateTime>(nullable: true),
-                    CreatedByUserId = table.Column<string>(nullable: true),
-                    ModifiedByUserId = table.Column<string>(nullable: true),
-                    FirstName = table.Column<string>(nullable: false),
-                    LastName = table.Column<string>(nullable: false),
-                    PostalCode = table.Column<string>(nullable: false),
-                    Email = table.Column<string>(nullable: false),
-                    Mobile = table.Column<string>(nullable: false),
-                    CountryId = table.Column<string>(nullable: false),
-                    Street = table.Column<string>(nullable: false),
-                    City = table.Column<string>(nullable: false),
-                    State = table.Column<string>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Addresses", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Addresses_Countries_CountryId",
-                        column: x => x.CountryId,
-                        principalTable: "Countries",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "RoleClaims",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Sqlite:Autoincrement", true),
                     RoleId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
@@ -127,7 +90,7 @@ namespace Modwana.Persistance.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Sqlite:Autoincrement", true),
                     UserId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
@@ -208,11 +171,6 @@ namespace Modwana.Persistance.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Addresses_CountryId",
-                table: "Addresses",
-                column: "CountryId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_RoleClaims_RoleId",
                 table: "RoleClaims",
                 column: "RoleId");
@@ -221,8 +179,7 @@ namespace Modwana.Persistance.Migrations
                 name: "RoleNameIndex",
                 table: "Roles",
                 column: "NormalizedName",
-                unique: true,
-                filter: "[NormalizedName] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserClaims_UserId",
@@ -248,14 +205,13 @@ namespace Modwana.Persistance.Migrations
                 name: "UserNameIndex",
                 table: "Users",
                 column: "NormalizedUserName",
-                unique: true,
-                filter: "[NormalizedUserName] IS NOT NULL");
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Addresses");
+                name: "Blogs");
 
             migrationBuilder.DropTable(
                 name: "RoleClaims");
@@ -271,9 +227,6 @@ namespace Modwana.Persistance.Migrations
 
             migrationBuilder.DropTable(
                 name: "UserTokens");
-
-            migrationBuilder.DropTable(
-                name: "Countries");
 
             migrationBuilder.DropTable(
                 name: "Roles");

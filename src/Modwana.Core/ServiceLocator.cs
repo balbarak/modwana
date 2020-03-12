@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -8,11 +9,11 @@ namespace Modwana.Core
 {
     public class ServiceLocator : IDisposable
     {
-        static private readonly ConcurrentDictionary<int, ServiceLocator> _serviceLocators = new ConcurrentDictionary<int, ServiceLocator>();
+        private static readonly ConcurrentDictionary<int, ServiceLocator> _serviceLocators = new ConcurrentDictionary<int, ServiceLocator>();
 
-        static private ServiceProvider _rootServiceProvider = null;
+        private static IServiceProvider _rootServiceProvider = null;
 
-        private IServiceScope _serviceScope = null;
+        private static IServiceScope _serviceScope = null;
 
         static public ServiceLocator Current
         {
@@ -27,20 +28,42 @@ namespace Modwana.Core
             _serviceScope = _rootServiceProvider.CreateScope();
         }
 
-        static public void Configure(IServiceCollection serviceCollections)
+        public static void Configure(IServiceCollection serviceCollections)
         {
             _rootServiceProvider = serviceCollections.BuildServiceProvider();
+            _serviceScope = _rootServiceProvider.CreateScope();
 
+        }
+
+        public static void Configure(IServiceProvider provider)
+        {
+            _rootServiceProvider = provider;
+            _serviceScope = provider.CreateScope();
         }
         
         public T GetService<T>(bool isRequired = true)
         {
-            if (isRequired)
+
+            var httpContext = _rootServiceProvider.GetService<IHttpContextAccessor>();
+            IServiceProvider provider = null;
+
+            if (httpContext != null && httpContext.HttpContext != null)
             {
-                return _serviceScope.ServiceProvider.GetRequiredService<T>();
+                //Get HttpContext IServiceProivder
+                provider = httpContext.HttpContext.RequestServices;
+            }
+            else
+            {
+                provider = _serviceScope.ServiceProvider;
             }
 
-            return _serviceScope.ServiceProvider.GetService<T>();
+
+            if (isRequired)
+            {
+                return provider.GetRequiredService<T>();
+            }
+
+            return provider.GetService<T>();
         }
 
         #region Dispose

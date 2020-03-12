@@ -11,7 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Modwana.Persistance", "Modw
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Modwana.Domain", "Modwana.Domain\Modwana.Domain.csproj", "{E71190C9-380A-49D0-9BB2-A1D6B948C4FD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modwana.Web", "Modwana.Web\Modwana.Web.csproj", "{A42CA7D4-DE5C-45FA-B8BD-A567E87189CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Modwana.Web", "Modwana.Web\Modwana.Web.csproj", "{A42CA7D4-DE5C-45FA-B8BD-A567E87189CA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{98BF1163-0EEC-45C7-9F97-27196E2007AB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modwana.Test", "Modawana.Test\Modwana.Test.csproj", "{51DE8FE7-2906-41A7-A5D5-EF9883A80FAD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,9 +43,16 @@ Global
 		{A42CA7D4-DE5C-45FA-B8BD-A567E87189CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A42CA7D4-DE5C-45FA-B8BD-A567E87189CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A42CA7D4-DE5C-45FA-B8BD-A567E87189CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51DE8FE7-2906-41A7-A5D5-EF9883A80FAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51DE8FE7-2906-41A7-A5D5-EF9883A80FAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51DE8FE7-2906-41A7-A5D5-EF9883A80FAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51DE8FE7-2906-41A7-A5D5-EF9883A80FAD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{51DE8FE7-2906-41A7-A5D5-EF9883A80FAD} = {98BF1163-0EEC-45C7-9F97-27196E2007AB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {46A073EF-78C7-4DDC-83B3-8FBF1ACA2DB2}

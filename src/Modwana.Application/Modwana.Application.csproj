@@ -12,7 +12,7 @@
     <ProjectReference Include="..\Modwana.Domain\Modwana.Domain.csproj" />
     <ProjectReference Include="..\Modwana.Persistance\Modwana.Persistance.csproj" />
 
-    <FrameworkReference Include="Microsoft.AspNetCore.App"/>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
 </Project>
