@@ -67,8 +67,6 @@ namespace Modwana.Persistance.Repositories
         {
             ModwanaDbContext context = _context ?? new ModwanaDbContext();
 
-            var dbSet = context.Set<TEntity>();
-
             if (entityToUpdate is AuditableEntity auditableEntity)
                 auditableEntity.UpdateAudit();
 

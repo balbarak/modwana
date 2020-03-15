@@ -43,7 +43,6 @@ namespace Modwana.Core
         
         public T GetService<T>(bool isRequired = true)
         {
-
             var httpContext = _rootServiceProvider.GetService<IHttpContextAccessor>();
             IServiceProvider provider = null;
 
