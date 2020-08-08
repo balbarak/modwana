@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Localization.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -49,6 +52,11 @@ namespace Modwana.Web
 
             app.UseAuthorization();
 
+            var defualtLang = "ar";
+            var localOptions = GetRequestLocalizationOptions(defualtLang);
+
+            app.UseRequestLocalization(localOptions);
+
             app.UseEndpoints(endpoints =>
             {
 
@@ -60,10 +68,36 @@ namespace Modwana.Web
 
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}",
+                    defaults: new { culture = defualtLang });
 
 
             });
+        }
+
+        private RequestLocalizationOptions GetRequestLocalizationOptions(string defaultLang)
+        {
+            var arSACulture = new CultureInfo("ar")
+            {
+                DateTimeFormat = new CultureInfo("en").DateTimeFormat
+            };
+
+            var supportedCultures = new[]
+            {
+                new CultureInfo("en"),
+                arSACulture
+            };
+
+            var options = new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture(defaultLang),
+                SupportedCultures = supportedCultures,
+                SupportedUICultures = supportedCultures
+            };
+
+            var requestProvider = new RouteDataRequestCultureProvider();
+            options.RequestCultureProviders.Insert(0, requestProvider);
+            return options;
         }
     }
 }
