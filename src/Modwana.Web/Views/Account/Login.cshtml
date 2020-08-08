@@ -1,4 +1,31 @@
-﻿
-@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@{
+    Layout = "~/Views/Shared/Login/_Layout.cshtml";
+}
+
+
+<h1 class="text-center">
+    تسجيل دخول
+</h1>
+<div class="form-signin">
+    <div class="card">
+        <div class="card-body">
+
+            <div class="form-group">
+                <label>
+                    @CommonText.Email
+                </label>
+                <input type="text" class="form-control" />
+            </div>
+            <div class="form-group ">
+                <label>
+                    @CommonText.Password
+                </label>
+                <input type="text" class="form-control form-control" />
+            </div>
+            <hr />
+            <button type="button" class="btn btn-primary btn-block">
+                @CommonText.Login
+            </button>
+        </div>
+    </div>
+</div>
