@@ -1,0 +1,48 @@
+{
+  "_from": "jquery-validation-unobtrusive-bootstrap",
+  "_id": "jquery-validation-unobtrusive-bootstrap@2.2.0",
+  "_inBundle": false,
+  "_integrity": "sha512-T/b9oS4zuVNpnIeXOqZUCaZWNxne+9qQrpj1RRkFQ0wBbE6V/6CGbCANxy/KNOC31IDqekVYDEUwfbRzDpPL9Q==",
+  "_location": "/jquery-validation-unobtrusive-bootstrap",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "jquery-validation-unobtrusive-bootstrap",
+    "name": "jquery-validation-unobtrusive-bootstrap",
+    "escapedName": "jquery-validation-unobtrusive-bootstrap",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/jquery-validation-unobtrusive-bootstrap/-/jquery-validation-unobtrusive-bootstrap-2.2.0.tgz",
+  "_shasum": "5e357ff42f1274a5fedb5ffaa176802a8c9db494",
+  "_spec": "jquery-validation-unobtrusive-bootstrap",
+  "_where": "C:\\Users\\balbarak\\Desktop\\jslib",
+  "author": {
+    "name": "Timm Bremus",
+    "email": "t.bremus@bremus-solutions.de"
+  },
+  "bugs": {
+    "url": "https://github.com/brecons/jquery-validation-unobtrusive-bootstrap/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "Add-on to jQuery Validation to make unobtrusive validation compatible to Bootstrap v4.x.",
+  "files": [
+    "dist/*.js"
+  ],
+  "homepage": "https://www.brecons.net",
+  "license": "MIT",
+  "main": "dist/unobtrusive-bootstrap.js",
+  "name": "jquery-validation-unobtrusive-bootstrap",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brecons/jquery-validation-unobtrusive-bootstrap.git"
+  },
+  "version": "2.2.0"
+}

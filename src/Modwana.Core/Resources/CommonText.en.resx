@@ -390,4 +390,7 @@
   <data name="AccessDenied" xml:space="preserve">
     <value>Access Denied</value>
   </data>
+  <data name="AppName" xml:space="preserve">
+    <value>Modwana App</value>
+  </data>
 </root>

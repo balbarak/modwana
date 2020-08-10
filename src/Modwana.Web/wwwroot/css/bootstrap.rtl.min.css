@@ -41,7 +41,7 @@
 }
 
 html {
-    font-family: sans-serif;
+    font-family: 'DroidSans', 'Tajawal';
     line-height: 1.15;
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: transparent
@@ -53,7 +53,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
 
 body {
     margin: 0;
-    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    font-family: 'DroidSans', 'Tajawal';
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
@@ -2271,7 +2271,7 @@ textarea.form-control {
 
 .was-validated textarea.form-control:invalid, textarea.form-control.is-invalid {
     padding-left: 2.25rem;
-    background-position: top calc(2.25rem / 4) left calc(2.25rem / 4)
+    background-position: top calc(2.25rem / 4) right calc(2.25rem / 4)
 }
 
 .custom-select.is-invalid, .was-validated .custom-select:invalid {

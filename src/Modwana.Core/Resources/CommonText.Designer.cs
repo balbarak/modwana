@@ -115,6 +115,15 @@ namespace Modwana.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to نظام مدونة.
+        /// </summary>
+        public static string AppName {
+            get {
+                return ResourceManager.GetString("AppName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to معتمد.
         /// </summary>
         public static string Approved {

@@ -396,4 +396,7 @@
   <data name="AccessDenied" xml:space="preserve">
     <value>غير مصرح</value>
   </data>
+  <data name="AppName" xml:space="preserve">
+    <value>نظام مدونة</value>
+  </data>
 </root>
