@@ -6,9 +6,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Modwana.Web.Controllers
 {
-    public class BlogController : Controller
+    public class BlogController : BaseController
     {
         public IActionResult Index()
+        {
+            return View();
+        }
+
+        public IActionResult Add()
         {
             return View();
         }

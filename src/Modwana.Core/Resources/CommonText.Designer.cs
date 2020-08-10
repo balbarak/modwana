@@ -97,6 +97,15 @@ namespace Modwana.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to اضف مشاركة.
+        /// </summary>
+        public static string AddPost {
+            get {
+                return ResourceManager.GetString("AddPost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to العنوان.
         /// </summary>
         public static string Address {
@@ -858,6 +867,15 @@ namespace Modwana.Core.Resources {
         public static string Tabs {
             get {
                 return ResourceManager.GetString("Tabs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to العنوان.
+        /// </summary>
+        public static string Title {
+            get {
+                return ResourceManager.GetString("Title", resourceCulture);
             }
         }
         

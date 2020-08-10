@@ -63,13 +63,13 @@ namespace Modwana.Web
                 app.UseExceptionHandler("/Home/Error");
             }
 
-            context.Database.Migrate();
-            context.Database.EnsureCreated();
-            context.EnsureSeeding().GetAwaiter().GetResult();
+            EnsureDatabaseSetup(context);
 
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
@@ -85,6 +85,13 @@ namespace Modwana.Web
                     pattern: "{controller=Home}/{action=Index}/{id?}",
                     defaults: new { culture = defualtLang });
             });
+        }
+
+        private void EnsureDatabaseSetup(ModwanaDbContext context)
+        {
+            context.Database.Migrate();
+            context.Database.EnsureCreated();
+            context.EnsureSeeding().GetAwaiter().GetResult();
         }
 
         private RequestLocalizationOptions GetRequestLocalizationOptions(string defaultLang)

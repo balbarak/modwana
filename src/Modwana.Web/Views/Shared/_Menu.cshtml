@@ -3,6 +3,14 @@
     <a class="p-2 text-dark" href="/">
         @CommonText.Home
     </a>
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        <a class="p-2 text-dark" asp-action="add" asp-controller="blog">
+            @CommonText.AddPost
+        </a>
+
+    }
     <a class="p-2 text-dark" href="#">Enterprise</a>
     <a class="p-2 text-dark" href="#">Support</a>
     <a class="p-2 text-dark" href="#">Pricing</a>

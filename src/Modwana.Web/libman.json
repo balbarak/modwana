@@ -16,6 +16,11 @@
       "destination": "wwwroot/lib/font-awesome"
     },
     {
+      "library": "editor-md@1.5.0",
+      "destination": "wwwroot/lib/markdown"
+    },
+
+    {
       "library": "toastr.js@2.1.4",
       "destination": "wwwroot/lib/toaster"
     },

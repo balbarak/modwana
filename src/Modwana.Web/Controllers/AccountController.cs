@@ -35,10 +35,9 @@ namespace Modwana.Web.Controllers
             {
                 ValidateModelState();
 
-
                 SignInResult result = null;
 
-                result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, true, lockoutOnFailure: false);
+                result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, true, lockoutOnFailure: true);
 
                 if (result.IsLockedOut)
                     throw new BusinessException(MessageText.AccountLocked);
@@ -57,6 +56,13 @@ namespace Modwana.Web.Controllers
             }
 
             return RedirectToAction("index", "home");
+        }
+
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+
+            return RedirectToAction(nameof(HomeController.Index), "Home");
         }
     }
 }

@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewData["Title"] = CommonText.AddPost;
+}
+
+@section styles{
+
+
+
+    <link href="~/lib/codemirror-rtl/lib/codemirror.css" rel="stylesheet" />
+    <link href="~/lib/markdown/toastui-editor.css" rel="stylesheet" />
+
+}
+
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Library</li>
+    </ol>
+</nav>
+<div class="card">
+    <div class="card-body">
+
+        <partial name="_Form" model="new BlogViewModel()" />
+
+    </div>
+</div>
+
+
+@section scripts{
+
+
+    <script src="https://uicdn.toast.com/editor/latest/toastui-jquery-editor.min.js"></script>
+    <script src="~/lib/markdown/i18n/ar.js"></script>
+
+
+    <script type="text/javascript">
+
+        $(function () {
+
+            $('#editor').toastuiEditor({
+                height: '500px',
+                initialEditType: 'markdown',
+                previewStyle: 'vertical',
+                language: "ar"
+                //viewer: true
+            });
+
+        })
+    </script>
+}
