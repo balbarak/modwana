@@ -5,13 +5,18 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Localization.Routing;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Modwana.Application;
+using Modwana.Application.Identities;
 using Modwana.Core;
+using Modwana.Domain.Models;
+using Modwana.Persistance;
 
 namespace Modwana.Web
 {
@@ -30,10 +35,22 @@ namespace Modwana.Web
         {
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
+            services.AddIdentity<User, Role>()
+                .AddUserManager<ModwanaUserManager>()
+                .AddEntityFrameworkStores<ModwanaDbContext>()
+                .AddErrorDescriber<ModwanaIdentityErrorDescriber>()
+                .AddClaimsPrincipalFactory<ModwanaClaimsPrincipalFactory>()
+                .AddRoleStore<ModwanaRoleStore>()
+                .AddUserStore<ModwanaUserStore>()
+                .AddSignInManager<ModwanaSignInManager>()
+                .AddDefaultTokenProviders();
+
             ModwanaApp.Init(services, Configuration);
+
+            ServiceLocator.Configure(services);
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ModwanaDbContext context)
         {
             //app.ApplicationServices
 
@@ -45,7 +62,11 @@ namespace Modwana.Web
             {
                 app.UseExceptionHandler("/Home/Error");
             }
-            
+
+            context.Database.Migrate();
+            context.Database.EnsureCreated();
+            context.EnsureSeeding().GetAwaiter().GetResult();
+
             app.UseStaticFiles();
 
             app.UseRouting();

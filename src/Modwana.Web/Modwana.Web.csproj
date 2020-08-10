@@ -19,6 +19,7 @@
     <ProjectReference Include="..\Modwana.Persistance\Modwana.Persistance.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Database\" />
     <Folder Include="wwwroot\fonts\" />
   </ItemGroup>
 

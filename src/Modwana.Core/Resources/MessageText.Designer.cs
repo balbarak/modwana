@@ -70,6 +70,15 @@ namespace Modwana.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to تم تعطيل الحساب الرجاء المحاولة بعد فترة.
+        /// </summary>
+        public static string AccountLocked {
+            get {
+                return ResourceManager.GetString("AccountLocked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to لا يمكنك حذف العنصر لارتباطه بعناصر اخرى.
         /// </summary>
         public static string DatabaseRelatedItemOnDelete {

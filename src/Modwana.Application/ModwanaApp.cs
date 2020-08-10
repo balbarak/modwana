@@ -1,8 +1,10 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Modwana.Application.Identities;
 using Modwana.Application.Services;
 using Modwana.Core;
 using Modwana.Core.Interfaces;
+using Modwana.Domain.Models;
 using Modwana.Domain.Services;
 using Modwana.Persistance;
 using Modwana.Persistance.Repositories;
@@ -18,6 +20,8 @@ namespace Modwana.Application
         {
 
             services.AddTransient<IGenericRepository, GenericRepository>(config => new GenericRepository());
+
+            services.AddTransient<IModwanaUserManager<User>, ModwanaUserManager>();
 
             services.Configure<AppSettings>(configuration.GetSection(nameof(AppSettings)));
 

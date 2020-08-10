@@ -9,12 +9,13 @@
     @*<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />*@
     <link href="~/css/bootstrap.rtl.min.css" rel="stylesheet" />
     <link href="~/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/lib/toaster/toastr.min.css" rel="stylesheet" />
     <link href="~/css/login.css" rel="stylesheet" />
     <link href="~/css/site.css" rel="stylesheet" />
 </head>
 
 <body>
-    
+
     <div class="container">
 
         <main role="main" class="pb-3">
@@ -22,7 +23,9 @@
         </main>
 
         <p class="text-center">
-            @CommonText.AppName
+            <a href="/">
+                @CommonText.AppName
+            </a>
         </p>
     </div>
 
@@ -34,7 +37,24 @@
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive-bootstrap/dist/unobtrusive-bootstrap.js"></script>
 
+    <script src="~/lib/toaster/toastr.min.js"></script>
+
+    <script src="~/js/alert.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script type="text/javascript">
+
+        $(function () {
+             @if (TempData.ContainsKey(WebConstants.ALERT))
+             {
+                  <text>
+                    var alertObject = @Html.Raw(TempData[WebConstants.ALERT]);
+                    showAlert(alertObject);
+                  </text>
+             }
+        });
+
+    </script>
 
     @RenderSection("scripts", required: false)
 </body>

@@ -139,4 +139,7 @@
   <data name="PleaseFixTheFollowingErrors" xml:space="preserve">
     <value>Please fix the following errors</value>
   </data>
+  <data name="AccountLocked" xml:space="preserve">
+    <value>Account is locked please try again later.</value>
+  </data>
 </root>

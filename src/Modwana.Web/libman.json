@@ -16,6 +16,10 @@
       "destination": "wwwroot/lib/font-awesome"
     },
     {
+      "library": "toastr.js@2.1.4",
+      "destination": "wwwroot/lib/toaster"
+    },
+    {
       "provider": "unpkg",
       "library": "bootstrap@4.1.3",
       "destination": "wwwroot/lib/bootstrap/"

@@ -99,9 +99,7 @@ namespace Modwana.Persistance
                 Seed(Roles, a => a.Id);
             }
 
-            var seedDefaultAdminTask = SeedDefaultAdminUser();
-
-            await Task.WhenAll(seedDefaultAdminTask);
+            await SeedDefaultAdminUser();
         }
 
         public override int SaveChanges()
@@ -144,7 +142,7 @@ namespace Modwana.Persistance
 
                 await userManager.ResetPasswordAsync(found, token, "1122");
 
-                await userManager.AddToRoleAsync(found, AppRoles.ADMIN_ROLE);
+                //await userManager.AddToRoleAsync(found, AppRoles.ADMIN_ROLE);
 
             }
 

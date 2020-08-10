@@ -100,5 +100,26 @@ namespace Modwana.Web.Controllers
             return sb.ToString();
         }
 
+        protected void ValidateModelState()
+        {
+            if (!ModelState.IsValid)
+                throw new BusinessException(GetModalStateErrors());
+        }
+
+        protected List<string> GetModalStateErrors()
+        {
+            var result = new List<string>();
+
+            foreach (var modelState in ViewData.ModelState.Values)
+            {
+                foreach (var error in modelState.Errors)
+                {
+                    result.Add(error.ErrorMessage);
+                }
+            }
+
+            return result;
+        }
+
     }
 }
