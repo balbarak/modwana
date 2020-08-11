@@ -1,0 +1,38 @@
+﻿@model Blog
+
+<div class="card blog">
+    <div class="card-body">
+        <a asp-action="details" asp-controller="blog" asp-route-id="@Model.Id">
+            <h3 class="card-title">
+                @Model.Title
+            </h3>
+        </a>
+        <ul class="list-inline">
+            <li class="list-inline-item">
+                <i class="fa fa-user-o"></i>
+                balbarak
+            </li>
+            <li class="list-inline-item text-muted">
+                <i class="fa fa-calendar-o"></i>
+                2016-01-03
+            </li>
+            <li class="list-inline-item">
+                <i class="fa fa-comment-o"></i>
+                12
+            </li>
+
+        </ul>
+        <p>
+            @Model.Body.StripHtml()?.Brief(300)
+        </p>
+        <p>
+            <a asp-action="details" asp-controller="blog" asp-route-id="@Model.Id" class="btn btn-primary btn-sm">
+                @CommonText.ReadMore
+            </a>
+            <a asp-action="edit" asp-controller="blog" asp-route-id="@Model.Id" class="btn btn-info btn-sm">
+                <i class="fa fa-edit"></i>
+                @CommonText.Edit
+            </a>
+        </p>
+    </div>
+</div>

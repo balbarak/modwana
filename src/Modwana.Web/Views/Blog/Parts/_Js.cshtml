@@ -1,0 +1,35 @@
+﻿
+
+<script src="~/lib/tinymc/tinymce.jquery.min.js"></script>
+<script src="~/lib/tinymc/plugins/codesample/plugin.min.js"></script>
+<script src="~/lib/tinymc/plugins/lists/plugin.min.js"></script>
+<script src="~/lib/tinymc/plugins/link/plugin.min.js"></script>
+<script src="~/lib/tinymc/plugins/image/plugin.min.js"></script>
+<script src="~/lib/tinymc/plugins/paste/plugin.min.js"></script>
+<script src="~/lib/tinymc/plugins/fullscreen/plugin.js"></script>
+<script src="~/lib/tinymc/plugins/table/plugin.min.js"></script>
+<script src="~/lib/tinymc/plugins/hr/plugin.min.js"></script>
+<script src="~/lib/tinymc/langs/ar.js"></script>
+
+<script type="text/javascript">
+
+        $(function () {
+
+            tinymce.init({
+                selector: '#editor',
+                plugins: ["codesample", "lists", "link", "image", "paste", "fullscreen", "table", "hr"],
+                directionality: "rtl",
+                language: "ar",
+                toolbar: 'styleselect | bold italic | hr | alignleft aligncenter alignright | numlist bullist | link image | table | codesample  | fullscreen | undo redo ',
+                style_formats: [
+                    { title: 'عنوان', block: 'h1' },
+                    { title: 'عنوان', block: 'h2' },
+                    { title: 'عنوان', block: 'h3' },
+                    { title: 'نص عادي', block: 'p' },
+                ],
+                menubar: false,
+                paste_data_images: true,
+                content_css: ["/css/editor.css"],
+            });
+        })
+</script>

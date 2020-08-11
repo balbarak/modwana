@@ -1,0 +1,58 @@
+﻿
+
+<modal id="confirm-modal" asp-centerd="true">
+    <modal-header>
+
+    </modal-header>
+    <form id="confirm-form" action="" method="post">
+        <modal-body>
+
+            <div id="confirm-alert"></div>
+
+            <h4>
+                @CommonText.AreYouSure
+            </h4>
+
+        </modal-body>
+        <modal-footer>
+            <button type="submit" class="btn btn-success">
+                @CommonText.Yes
+            </button>
+            <button type="button" data-dismiss="modal" class="btn btn-danger">
+                @CommonText.No
+            </button>
+        </modal-footer>
+    </form>
+</modal>
+
+
+<modal id="confirm-ajax-modal" asp-content-id="confirm-ajax-content" asp-centerd="true">
+    <modal-header>
+        <h5 class="modal-title">
+            @CommonText.ConfirmAction
+        </h5>
+    </modal-header>
+    <form asp-ajax="true"
+          asp-ajax-modal="#confirm-ajax-modal"
+          asp-ajax-block="#confirm-ajax-content"
+          asp-ajax-error="#confirm-ajax-alert"
+          method="post"
+          id="confirm-ajax-form"
+          action="">
+        <modal-body>
+            <div id="confirm-ajax-alert" data-alert=""></div>
+            <h4>
+                @CommonText.AreYouSure
+            </h4>
+        </modal-body>
+        <modal-footer asp-show-close-button="false">
+            <button type="submit" class="btn btn-success m-btn">
+                @CommonText.Yes
+            </button>
+            <button type="button" data-dismiss="modal" class="btn btn-danger">
+                @CommonText.No
+            </button>
+        </modal-footer>
+    </form>
+</modal>
+

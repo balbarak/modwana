@@ -1,0 +1,5 @@
+﻿WHILE (1=1)
+BEGIN
+    DELETE TOP(1000) FROM table
+    IF @@ROWCOUNT < 1 BREAK
+END

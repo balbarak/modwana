@@ -1,0 +1,32 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "jquery@3.3.1",
+      "files": [
+        "jquery.min.js",
+        "jquery.js",
+        "jquery.min.map"
+      ],
+      "destination": "wwwroot/lib/jquery/"
+    },
+    {
+      "library": "font-awesome@5.12.1",
+      "destination": "wwwroot/lib/font-awesome"
+    },
+    {
+      "library": "tinymce@4.5.12",
+      "destination": "wwwroot/lib/tinymc"
+    },
+    {
+      "library": "toastr.js@2.1.4",
+      "destination": "wwwroot/lib/toaster"
+    },
+    {
+      "provider": "unpkg",
+      "library": "bootstrap@4.1.3",
+      "destination": "wwwroot/lib/bootstrap/"
+    }
+  ]
+}

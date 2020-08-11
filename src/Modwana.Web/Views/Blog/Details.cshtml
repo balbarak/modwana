@@ -1,0 +1,28 @@
+﻿@model Blog
+@{
+    ViewData["Title"] = "Details";
+}
+
+@section styles{
+
+    <link href="~/prism/prism.css" rel="stylesheet" />
+
+}
+
+<div class="card blog">
+    <div class="card-body">
+
+        <h3 class="card-title">
+            @Model.Title
+        </h3>
+
+        @Html.Raw(Model.Body)
+
+
+    </div>
+</div>
+
+
+@section scripts{
+    <script src="~/prism/prism.js"></script>
+}

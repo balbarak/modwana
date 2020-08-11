@@ -1,0 +1,30 @@
+﻿@{
+    Layout = "~/Views/Shared/Login/_Layout.cshtml";
+    ViewBag.Title = CommonText.Login;
+}
+
+
+<h3 class="text-center">
+    تسجيل دخول
+</h3>
+<div class="form-signin">
+    <div class="card">
+        
+        <form method="post"
+              asp-action="login">
+
+            <div class="card-body">
+
+                <div id="alert"></div>
+
+                
+
+                <partial name="_LoginForm" model="new LoginViewModel()" />
+                <hr />
+                <button type="submit" class="btn btn-primary btn-block">
+                    @CommonText.Login
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

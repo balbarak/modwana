@@ -1,0 +1,15 @@
+﻿@model BlogViewModel
+
+<input type="hidden" asp-for="Id"/>
+
+<bootstrap-input-form-group asp-for="Title" />
+
+
+<div class="form-group">
+    <label for="Body">
+        @CommonText.Text *
+        <span asp-validation-for="Body"></span>
+    </label>
+    
+    <textarea id="editor" asp-for="Body" class="form-control" rows="20"></textarea>
+</div>

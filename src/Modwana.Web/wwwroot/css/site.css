@@ -1,0 +1,111 @@
+﻿@font-face {
+    font-family: 'Tajawal';
+    font-style: normal;
+    font-weight: 400;
+    src: url('/fonts/Tajawal-Regular.ttf');
+    unicode-range: U+0600-06FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE80-FEFC;
+}
+
+@font-face {
+    font-family: 'Tajawal';
+    font-style: normal;
+    font-weight: 500;
+    src: url('/fonts/Tajawal-Bold.ttf');
+    unicode-range: U+0600-06FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE80-FEFC;
+}
+
+@font-face {
+    font-family: 'DroidSans';
+    font-weight: 400;
+    font-style: normal;
+    src: url('/fonts/DroidSans-webfont.eot');
+    src: url('/fonts/DroidSans-webfont.eot?#iefix') format('embedded-opentype'), url('/fonts/DroidSans-webfont.woff') format('woff'), url('/fonts/DroidSans-webfont.ttf') format('truetype'), url('/fonts/DroidSans-webfont.svg#droid_sansregular') format('svg');
+}
+
+@font-face {
+    font-family: 'DroidSans';
+    font-weight: 500;
+    font-style: normal;
+    src: url('/fonts/DroidSans-Bold-webfont.eot');
+    src: url('/fonts/DroidSans-Bold-webfont.eot?#iefix') format('embedded-opentype'), url('/fonts/DroidSans-Bold-webfont.woff') format('woff'), url('/fonts/DroidSans-Bold-webfont.ttf') format('truetype'), url('/fonts/DroidSans-Bold-webfont.svg#droid_sansbold') format('svg');
+}
+
+
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+a {
+  color: #0366d6;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.border-top {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+    background-color: #EFEFEF;
+    margin-bottom: 60px;
+}
+.footer {
+  position: absolute;
+  background-color:white;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px; /* Vertically center the text there */
+}
+
+.blog{
+    margin:10px 0px;
+}
+
+    .blog li {
+        font-size: 0.9rem;
+        color: #6c757d;
+    }

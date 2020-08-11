@@ -1,0 +1,21 @@
+﻿@model SearchResult<Blog>
+
+
+@if (Model.Result.Any())
+{
+
+    @foreach (var item in Model.Result)
+    {
+        <div class="col-12">
+            <partial name="Parts/_Item" model="item" />
+        </div>
+    }
+}
+else
+{
+    <div class="alert alert-primary text-center" role="alert">
+        <strong>
+            @CommonText.NoRecords
+        </strong>
+    </div>
+}

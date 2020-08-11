@@ -1,0 +1,55 @@
+﻿@model Blog
+@{
+    ViewData["Title"] = CommonText.Edit;
+}
+
+
+
+@section styles{
+
+    <link href="~/lib/tinymc/skins/lightgray/skin.min.css" rel="stylesheet" />
+    <link href="~/lib/tinymc/plugins/codesample/css/prism.min.css" rel="stylesheet" />
+}
+
+
+@section top{
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Library</li>
+        </ol>
+    </nav>
+}
+
+<div class="card">
+    <div class="card-body">
+        <a asp-action="delete"
+           asp-confirm="true"
+           asp-route-id="@Model.Id"
+           class="btn btn-sm btn-danger float-right" 
+           style="margin-bottom:5px;">
+            <i class="fa fa-trash"></i>
+            @CommonText.Delete
+        </a>
+        <form method="post"
+              asp-action="update">
+            <partial name="_Form" model="new BlogViewModel(Model)" />
+            <hr />
+            <button type="submit" class="btn btn-success btn-sm">
+                <i class="fa fa-save"></i>
+                @CommonText.Save
+            </button>
+            <a asp-action="index" class="btn btn-outline-danger btn-sm">
+                <i class="fa fa-ban"></i>
+                @CommonText.Cancel
+            </a>
+        </form>
+    </div>
+</div>
+
+
+@section scripts{
+
+    <partial name="Parts/_Js" />
+}

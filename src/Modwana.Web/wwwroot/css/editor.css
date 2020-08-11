@@ -1,0 +1,37 @@
+﻿@font-face {
+    font-family: 'Tajawal';
+    font-style: normal;
+    font-weight: 400;
+    src: url('/fonts/Tajawal-Regular.ttf');
+    unicode-range: U+0600-06FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE80-FEFC;
+}
+
+@font-face {
+    font-family: 'Tajawal';
+    font-style: normal;
+    font-weight: 500;
+    src: url('/fonts/Tajawal-Bold.ttf');
+    unicode-range: U+0600-06FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE80-FEFC;
+}
+
+@font-face {
+    font-family: 'DroidSans';
+    font-weight: 400;
+    font-style: normal;
+    src: url('/fonts/DroidSans-webfont.eot');
+    src: url('/fonts/DroidSans-webfont.eot?#iefix') format('embedded-opentype'), url('/fonts/DroidSans-webfont.woff') format('woff'), url('/fonts/DroidSans-webfont.ttf') format('truetype'), url('/fonts/DroidSans-webfont.svg#droid_sansregular') format('svg');
+}
+
+@font-face {
+    font-family: 'DroidSans';
+    font-weight: 500;
+    font-style: normal;
+    src: url('/fonts/DroidSans-Bold-webfont.eot');
+    src: url('/fonts/DroidSans-Bold-webfont.eot?#iefix') format('embedded-opentype'), url('/fonts/DroidSans-Bold-webfont.woff') format('woff'), url('/fonts/DroidSans-Bold-webfont.ttf') format('truetype'), url('/fonts/DroidSans-Bold-webfont.svg#droid_sansbold') format('svg');
+}
+
+
+body {
+    font-family: 'DroidSans', 'Tajawal';
+    font-size:14px;
+}

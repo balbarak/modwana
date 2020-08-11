@@ -1,0 +1,18 @@
+﻿
+<nav class="my-2 my-md-0 mr-md-3">
+    <a class="p-2 text-dark" href="/">
+        @CommonText.Home
+    </a>
+
+    <a class="p-2 text-dark" asp-action="index" asp-controller="blog">
+        @CommonText.Blogs
+    </a>
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        <a class="p-2 text-dark" asp-action="add" asp-controller="blog">
+            @CommonText.AddPost
+        </a>
+    }
+    
+</nav>
