@@ -16,6 +16,10 @@
       "destination": "wwwroot/lib/font-awesome"
     },
     {
+      "library": "jquery.blockUI@2.70",
+      "destination": "wwwroot/lib/blockui"
+    },
+    {
       "library": "tinymce@4.5.12",
       "destination": "wwwroot/lib/tinymc"
     },

@@ -21,6 +21,8 @@ namespace Modwana.Web.Controllers
 
         public async Task<IActionResult> Index(BlogSearchViewModel model)
         {
+            model.PageSize = 2;
+
             var result = await _service.Search(model.ToSearchModel());
 
             if (IsAjaxRequest())

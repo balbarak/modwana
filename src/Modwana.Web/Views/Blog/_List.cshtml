@@ -1,29 +1,55 @@
 ﻿@model SearchResult<Blog>
 
+@{
+    var search = Model.SearchCriteria as BlogSearchViewModel;
+}
 
 @if (Model.Result.Any())
 {
 
     @foreach (var item in Model.Result)
     {
-        <div class="col-12">
-            <partial name="Parts/_Item" model="item" />
-        </div>
+
+        <partial name="Parts/_Item" model="item" />
+
     }
+
+
+
+    <cs-pager cs-pager-ul-class="pagination pagination-sm"
+              cs-pager-li-other-class="page-item"
+              cs-pager-link-other-class="page-link"
+              cs-pager-li-current-class="page-item active"
+              cs-pager-link-current-class="page-link"
+              cs-paging-pagesize="@Model.PageSize"
+              cs-paging-pagenumber="@Model.PageNumber"
+              cs-paging-totalitems="@Model.TotalResultsCount"
+              asp-all-route-data="@search.ToRouteValueDictionary()"
+              cs-ajax-target="#list"
+              cs-ajax-begin="block('#list')"
+              cs-ajax-complete="unblock('#list')"
+              asp-controller="Blog"
+              asp-action="Index">
+
+    </cs-pager>
+    <strong>
+        @CommonText.Total:
+    </strong>
+    @Model.TotalResultsCount.ToString("N0")
 }
 else
 {
-<div class="alert alert-info" role="alert">
-    <h4 class="alert-heading">
-        لم يتم العثور على المدونة
-    </h4>
-    <hr>
-    <p>
-        لم تقم باضافة اي مدونة, بامكانك اضافة مدونة جديدة من خلال
-        <a asp-action="add" asp-controller="blog">
-            الضغط هنا
-        </a>
-    </p>
+    <div class="alert alert-info" role="alert">
+        <h4 class="alert-heading">
+            لم يتم العثور على المدونة
+        </h4>
+        <hr>
+        <p>
+            لم تقم باضافة اي مدونة, بامكانك اضافة مدونة جديدة من خلال
+            <a asp-action="add" asp-controller="blog">
+                الضغط هنا
+            </a>
+        </p>
 
-</div>
+    </div>
 }
