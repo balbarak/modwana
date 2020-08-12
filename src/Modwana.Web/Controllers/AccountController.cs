@@ -22,14 +22,17 @@ namespace Modwana.Web.Controllers
             _userManager = userManager;
         }
 
-        public IActionResult Login()
+        public IActionResult Login(string returnUrl = null)
         {
+
+            ViewData["ReturnUrl"] = returnUrl;
+
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginViewModel model)
+        public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
         {
             try
             {
@@ -55,7 +58,7 @@ namespace Modwana.Web.Controllers
                 return View(model);
             }
 
-            return RedirectToAction("index", "home");
+            return RedirectToLocal(returnUrl);
         }
 
         public async Task<IActionResult> Logout()
@@ -63,6 +66,18 @@ namespace Modwana.Web.Controllers
             await _signInManager.SignOutAsync();
 
             return RedirectToAction(nameof(HomeController.Index), "Home");
+        }
+
+        private IActionResult RedirectToLocal(string returnUrl)
+        {
+            if (Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+            else
+            {
+                return RedirectToAction(nameof(HomeController.Index), "Home");
+            }
         }
     }
 }

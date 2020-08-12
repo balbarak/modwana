@@ -27,6 +27,7 @@ namespace Modwana.Persistance
 
         public DbSet<Blog> Blogs { get; set; }
 
+        public DbSet<Author> Authors { get; set; }
 
         public ModwanaDbContext()
         {
@@ -195,6 +196,10 @@ namespace Modwana.Persistance
                 Id = id,
                 Email = email,
                 UserName = email,
+                Author = new Author()
+                {
+                    Name = "Admin"
+                }
             };
 
             return user;

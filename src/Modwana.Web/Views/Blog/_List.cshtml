@@ -13,9 +13,17 @@
 }
 else
 {
-    <div class="alert alert-primary text-center" role="alert">
-        <strong>
-            @CommonText.NoRecords
-        </strong>
-    </div>
+<div class="alert alert-info" role="alert">
+    <h4 class="alert-heading">
+        لم يتم العثور على المدونة
+    </h4>
+    <hr>
+    <p>
+        لم تقم باضافة اي مدونة, بامكانك اضافة مدونة جديدة من خلال
+        <a asp-action="add" asp-controller="blog">
+            الضغط هنا
+        </a>
+    </p>
+
+</div>
 }

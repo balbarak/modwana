@@ -18,6 +18,10 @@ namespace Modwana.Domain.Models
 
         public DateTime? PublishDate { get; set; }
 
+        public string AuthorId { get; set; }
+
+        public Author Author { get; set; }
+
         public Blog()
         {
             CreatedDate = SystemDate.Now;

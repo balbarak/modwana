@@ -9,14 +9,14 @@ using Modwana.Persistance;
 namespace Modwana.Persistance.Migrations
 {
     [DbContext(typeof(ModwanaDbContext))]
-    [Migration("20200312195245_init")]
+    [Migration("20200812155256_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.2");
+                .HasAnnotation("ProductVersion", "3.1.6");
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
@@ -120,12 +120,30 @@ namespace Modwana.Persistance.Migrations
                     b.ToTable("UserTokens");
                 });
 
+            modelBuilder.Entity("Modwana.Domain.Models.Author", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT")
+                        .HasMaxLength(128);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Authors");
+                });
+
             modelBuilder.Entity("Modwana.Domain.Models.Blog", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT")
                         .HasMaxLength(128);
+
+                    b.Property<string>("AuthorId")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Body")
                         .HasColumnType("TEXT");
@@ -141,6 +159,8 @@ namespace Modwana.Persistance.Migrations
                         .HasMaxLength(2048);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AuthorId");
 
                     b.ToTable("Blogs");
                 });
@@ -175,7 +195,8 @@ namespace Modwana.Persistance.Migrations
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT")
+                        .HasMaxLength(128);
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("INTEGER");
@@ -288,6 +309,22 @@ namespace Modwana.Persistance.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Modwana.Domain.Models.Author", b =>
+                {
+                    b.HasOne("Modwana.Domain.Models.User", "User")
+                        .WithOne("Author")
+                        .HasForeignKey("Modwana.Domain.Models.Author", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Modwana.Domain.Models.Blog", b =>
+                {
+                    b.HasOne("Modwana.Domain.Models.Author", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId");
                 });
 
             modelBuilder.Entity("Modwana.Domain.Models.Role", b =>

@@ -4,16 +4,20 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
+using System.ComponentModel.DataAnnotations;
 
 namespace Modwana.Domain.Models
 {
     public class User : IdentityUser , IBaseEntity
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [StringLength(128)]
         public override string Id { get => base.Id; set => base.Id = value; }
         public virtual ICollection<IdentityUserRole<string>> Roles { get; } = new HashSet<IdentityUserRole<string>>();
 
         public DateTime CreatedDate { get; set; }
+
+        public Author Author { get; set; }
 
         public User()
         {

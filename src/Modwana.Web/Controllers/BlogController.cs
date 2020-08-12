@@ -29,6 +29,7 @@ namespace Modwana.Web.Controllers
             return View(result);
         }
 
+        [Authorize]
         public IActionResult Add()
         {
             return View();
@@ -36,6 +37,7 @@ namespace Modwana.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Add(BlogViewModel model)
         {
             try
