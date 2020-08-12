@@ -417,4 +417,7 @@
   <data name="ReadMore" xml:space="preserve">
     <value>اقرأ المزيد</value>
   </data>
+  <data name="Authors" xml:space="preserve">
+    <value>الكتُاب</value>
+  </data>
 </root>

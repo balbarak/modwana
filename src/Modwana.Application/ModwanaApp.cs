@@ -19,6 +19,8 @@ namespace Modwana.Application
         public static void Init(IServiceCollection services,IConfiguration configuration)
         {
 
+            services.AddTransient<IUserService, UserService>();
+
             services.AddTransient<IGenericRepository, GenericRepository>(config => new GenericRepository());
 
             services.AddTransient<IModwanaUserManager<User>, ModwanaUserManager>();

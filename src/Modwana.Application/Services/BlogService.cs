@@ -1,9 +1,12 @@
-﻿using Modwana.Core.Interfaces;
+﻿using Modwana.Core;
+using Modwana.Core.Extensions;
+using Modwana.Core.Interfaces;
 using Modwana.Core.Search;
 using Modwana.Domain.Models;
 using Modwana.Domain.Services;
 using System;
 using System.Collections.Generic;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,14 +14,20 @@ namespace Modwana.Application.Services
 {
     public class BlogService : ServiceBase, IBlogService
     {
-
         public BlogService(IGenericRepository repository) : base(repository)
         {
-
+            Includes = new[]
+            {
+                nameof(Blog.Author)
+            };
         }
 
         public Task Add(Blog entity)
         {
+            var principal = ServiceLocator.Current.GetService<IPrincipal>();
+
+            entity.AuthorId = principal.GetUserId();
+
             return _repository.CreateAsync(entity);
         }
 

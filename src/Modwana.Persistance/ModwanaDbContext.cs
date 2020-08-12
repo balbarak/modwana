@@ -133,19 +133,18 @@ namespace Modwana.Persistance
                 await userManager.CreateAsync(user, "1122");
                 await userManager.AddToRoleAsync(user, AppRoles.ADMIN_ROLE);
             }
-            else
-            {
-                found.Update(user);
+            //else
+            //{
+            //    found.Update(user);
 
-                await userManager.UpdateAsync(found);
+            //    await userManager.UpdateAsync(found);
 
-                var token = await userManager.GeneratePasswordResetTokenAsync(found);
+            //    var token = await userManager.GeneratePasswordResetTokenAsync(found);
 
-                await userManager.ResetPasswordAsync(found, token, "1122");
+            //    await userManager.ResetPasswordAsync(found, token, "1122");
 
-                await userManager.AddToRoleAsync(found, AppRoles.ADMIN_ROLE);
-
-            }
+            //    await userManager.AddToRoleAsync(found, AppRoles.ADMIN_ROLE);
+            //}
 
         }
 
@@ -198,6 +197,7 @@ namespace Modwana.Persistance
                 UserName = email,
                 Author = new Author()
                 {
+                    Id = id,
                     Name = "Admin"
                 }
             };

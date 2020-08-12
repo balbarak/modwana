@@ -11,16 +11,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Modwana.Core.Interfaces;
+using Modwana.Domain.Services;
 
 namespace Modwana.Application.Services
 {
-    public class UserService : ServiceBase
+    public class UserService : ServiceBase , IUserService
     {
         public UserService(IGenericRepository repository) : base(repository)
         {
             Includes = new[]
             {
-                nameof(User.Roles)
+                nameof(User.Roles),
+                nameof(User.Author)
             };
         }
 
@@ -39,11 +41,9 @@ namespace Modwana.Application.Services
             return entity;
         }
 
-        public async Task<User> GetById(string id)
+        public Task<User> GetById(string id)
         {
-            var result =  await _repository.GetAsync<User>(a => a.Id == id, includeProperties: Includes);
-
-            return result.FirstOrDefault();
+            return _repository.GetByIdAsync<User>(id, Includes);
         }
 
         public async Task Delete(string id)
@@ -81,7 +81,7 @@ namespace Modwana.Application.Services
         
         public async Task<SearchResult<User>> Search(SearchCriteria<User> search)
         {
-            return await _repository.SearchAsync(search);
+            return await _repository.SearchAsync(search,Includes);
         }
 
         private async Task RemoveUserRoles(User user, ModwanaUserManager userManager)

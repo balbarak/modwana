@@ -31,6 +31,11 @@ namespace Modwana.Domain.Models
             NormalizedUserName = entity.UserName.ToUpper();
             NormalizedEmail = entity.Email.ToUpper();
 
+            if (Author == null)
+                Author = new Author();
+
+            Author.Update(entity.Author);
+
             Roles.Clear();
 
             foreach (var item in entity.Roles)

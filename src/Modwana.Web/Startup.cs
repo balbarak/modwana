@@ -2,9 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Security.Principal;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Localization.Routing;
@@ -37,6 +39,8 @@ namespace Modwana.Web
         {
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
+            services.AddHttpContextAccessor();
+
             services.AddIdentity<User, Role>()
                 .AddUserManager<ModwanaUserManager>()
                 .AddEntityFrameworkStores<ModwanaDbContext>()
@@ -48,6 +52,8 @@ namespace Modwana.Web
                 .AddDefaultTokenProviders();
 
             services.AddTransient<IDateTime, SystemDate>();
+
+            services.AddTransient<IPrincipal>((provider) => provider.GetService<IHttpContextAccessor>().HttpContext?.User);
 
             ModwanaApp.Init(services, Configuration);
 

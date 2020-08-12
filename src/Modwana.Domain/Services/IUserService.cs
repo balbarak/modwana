@@ -1,4 +1,5 @@
-﻿using Modwana.Domain.Models;
+﻿using Modwana.Core.Search;
+using Modwana.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,6 +11,12 @@ namespace Modwana.Domain.Services
     {
         Task<User> Add(User entity, string password);
 
-        User GetById(string id);
+        Task Delete(string id);
+        
+        Task<User> GetById(string id);
+        
+        Task<User> Save(User entity, string password = null);
+        
+        Task<SearchResult<User>> Search(SearchCriteria<User> search);
     }
 }

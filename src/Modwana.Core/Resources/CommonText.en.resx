@@ -411,4 +411,7 @@
   <data name="ReadMore" xml:space="preserve">
     <value>Read more</value>
   </data>
+  <data name="Authors" xml:space="preserve">
+    <value>Authors</value>
+  </data>
 </root>

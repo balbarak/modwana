@@ -1,0 +1,173 @@
+﻿
+@model SearchResult<User>
+
+@{
+    var search = Model.SearchCriteria as AuthorSearchViewModel;
+}
+
+@if (Model.Result.Any())
+{
+    <div class="table-responsive-sm">
+        <table class="table table-striped table-bordered">
+
+            <caption>
+                <p>
+                    <strong>
+                        @CommonText.Total:
+                    </strong>
+                    @Model.TotalResultsCount.ToString("N0")
+                </p>
+
+
+                <cs-pager cs-pager-ul-class="pagination"
+                          cs-pager-li-other-class="page-item"
+                          cs-pager-link-other-class="page-link"
+                          cs-pager-li-current-class="page-item active"
+                          cs-pager-link-current-class="page-link"
+                          cs-paging-pagesize="@Model.PageSize"
+                          cs-paging-pagenumber="@Model.PageNumber"
+                          cs-paging-totalitems="@Model.TotalResultsCount"
+                          asp-all-route-data="@search.ToRouteValueDictionary()"
+                          cs-ajax-target="#list"
+                          cs-ajax-begin="block('#list')"
+                          cs-ajax-complete="unblock('#list')"
+                          asp-controller="Country"
+                          asp-action="Index">
+
+                </cs-pager>
+
+                <input type="hidden" data-route value="@Url.RouteUrl(search.ToRouteValueDictionary(true))" />
+
+            </caption>
+
+            <thead>
+                <tr>
+                    <th class="text-center">
+                        @CommonText.Email
+                    </th>
+
+                    <th>
+                        @CommonText.Name
+                    </th>
+                    <th>
+                        @CommonText.CreatedDate
+                    </th>
+                    <th class="text-center">
+                        @CommonText.Actions
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model.Result)
+                {
+                    <tr>
+                        <td class="text-center">
+                            @item.Email
+                        </td>
+
+                        <td>
+                            @item.Author?.Name
+                        </td>
+                        <td>
+                            @item.CreatedDate.ToSystemDate()
+                        </td>
+                        <td class="text-sm-center">
+                            <div class="kt-hidden-mobile">
+                                <a asp-ajax="true"
+                                   asp-ajax-block="#list"
+                                   asp-ajax-replace="#edit-div"
+                                   asp-form-id="#edit-form"
+                                   asp-action="Edit"
+                                   asp-controller="Country"
+                                   asp-ajax-success-method="showModal('#edit-modal')"
+                                   asp-route-id="@item.Id"
+                                   class="btn btn-sm btn-primary">
+
+                                    <i class="fa fa-edit"></i>
+
+                                    @CommonText.Edit
+                                </a>
+
+                                <a class="btn btn-sm btn-danger m-btn m-btn--icon"
+                                   asp-ajax="true"
+                                   asp-confirm="true"
+                                   asp-action="Delete"
+                                   asp-controller="Country"
+                                   asp-ajax-success-method="updateListFromDiv('#list');"
+                                   asp-route-id="@item.Id"
+                                   asp-ajax-block="#list">
+                                    <i class="fa fa-trash"></i>
+                                    @CommonText.Delete
+
+                                </a>
+                            </div>
+
+                            <div class="dropdown dropdown-inline kt-hidden-desktop">
+                                <button type="button" class="btn btn-clean btn-sm btn-icon btn-icon-md" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="flaticon-more-1"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-md dropdown-menu-fit" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(32px, 33px, 0px);">
+
+                                    <!--begin::Nav-->
+                                    <ul class="kt-nav">
+
+                                        <li class="kt-nav__head">
+                                            @CommonText.Actions
+                                        </li>
+
+                                        <li class="kt-nav__separator"></li>
+
+                                        <li class="kt-nav__item">
+                                            <a asp-ajax="true"
+                                               asp-ajax-block="#list"
+                                               asp-ajax-replace="#edit-div"
+                                               asp-form-id="#edit-form"
+                                               asp-action="Edit"
+                                               asp-controller="Country"
+                                               asp-ajax-success-method="showModal('#edit-modal')"
+                                               asp-route-id="@item.Id"
+                                               class="kt-nav__link">
+
+                                                <i class="kt-nav__link-icon fa fa-edit"></i>
+                                                <span class="kt-nav__link-text">
+                                                    @CommonText.Edit
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="kt-nav__item">
+                                            <a class="kt-nav__link"
+                                               asp-ajax="true"
+                                               asp-confirm="true"
+                                               asp-action="Delete"
+                                               asp-controller="Country"
+                                               asp-ajax-success-method="updateListFromDiv('#list');"
+                                               asp-route-id="@item.Id"
+                                               asp-ajax-block="#list">
+                                                <i class="kt-nav__link-icon fa fa-trash"></i>
+                                                <span class="kt-nav__link-text">
+                                                    @CommonText.Delete
+                                                </span>
+                                            </a>
+                                        </li>
+
+                                    </ul>
+
+                                    <!--end::Nav-->
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+    </div>
+
+
+}
+else
+{
+    <metro-no-records />
+}

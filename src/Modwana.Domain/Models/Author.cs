@@ -13,5 +13,19 @@ namespace Modwana.Domain.Models
 
         public string Name { get; set; }
 
+        public Author()
+        {
+
+        }
+
+        public Author Update(Author entity)
+        {
+            if (entity == null)
+                return this;
+
+            Name = entity.Name;
+            
+            return this;
+        }
     }
 }
