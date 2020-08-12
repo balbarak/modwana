@@ -110,3 +110,26 @@ body {
         font-size: 0.9rem;
         color: #6c757d;
     }
+
+.loading-box {
+
+}
+
+.loading-message {
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    color: gray;
+    border-radius: 3px;
+    background-color: whitesmoke;
+    padding:5px;
+    box-shadow: 2px 2px;
+}
+
+.loading-message p {
+    text-align:center;
+    margin:auto;
+}
+    .loading-message p i{
+        margin: 0px 5px;
+    }

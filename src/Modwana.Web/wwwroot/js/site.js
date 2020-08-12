@@ -10,7 +10,14 @@ $(function () {
 function block(element) {
 
 
-    var html = '<div class="loading-message loading-message-boxed"><img src="/images/loading-spinner-grey.gif" align=""><span>&nbsp;&nbsp; </span></div>';
+    var html = '<div class="loading-box">' +
+                '<div class="loading-message">' +
+                    '<p>' +
+                        '<i class="fa fa-circle-o-notch fa-spin"></i>' +
+                        'الرجاء الانتظار ...' +
+                    '</p>'
+                 '</div>' +
+               '</div>';
     var options = {};
 
     var el = $(element);
