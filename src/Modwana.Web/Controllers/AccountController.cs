@@ -65,7 +65,7 @@ namespace Modwana.Web.Controllers
         {
             await _signInManager.SignOutAsync();
 
-            return RedirectToAction(nameof(HomeController.Index), "Home");
+            return RedirectToAction(nameof(BlogController.Index), "blog");
         }
 
         private IActionResult RedirectToLocal(string returnUrl)
@@ -76,7 +76,7 @@ namespace Modwana.Web.Controllers
             }
             else
             {
-                return RedirectToAction(nameof(HomeController.Index), "Home");
+                return RedirectToAction(nameof(BlogController.Index), "blog");
             }
         }
     }

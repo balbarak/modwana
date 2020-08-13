@@ -14,14 +14,22 @@
 
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Library</li>
+            <li class="breadcrumb-item">
+                <a href="/">
+                    @CommonText.Blogs
+                </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+                @CommonText.AddPost
+            </li>
         </ol>
     </nav>
+
 }
 
 <div class="card">
     <div class="card-body">
+
         <form method="post"
               asp-action="add">
             <partial name="_Form" model="new BlogViewModel()" />

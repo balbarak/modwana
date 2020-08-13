@@ -9,20 +9,37 @@
 
 }
 
+@section top{
+
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="/">
+                    @CommonText.Blogs
+                </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+                @Model.Title
+            </li>
+        </ol>
+    </nav>
+}
+
 <div class="card blog">
     <div class="card-body">
 
-        <h3 class="card-title">
+        <h2 class="card-title">
             @Model.Title
-        </h3>
+        </h2>
         <ul class="list-inline">
             <li class="list-inline-item">
                 <i class="fa fa-user-o"></i>
-                balbarak
+                @Model.Author?.Name
             </li>
             <li class="list-inline-item text-muted">
                 <i class="fa fa-calendar-o"></i>
-                2016-01-03
+                @Model.CreatedDate.ToSystemDate()
             </li>
             <li class="list-inline-item">
                 <i class="fa fa-comment-o"></i>

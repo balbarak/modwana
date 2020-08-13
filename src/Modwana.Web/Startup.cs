@@ -92,7 +92,7 @@ namespace Modwana.Web
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}",
+                    pattern: "{controller=blog}/{action=Index}/{id?}",
                     defaults: new { culture = defualtLang });
             });
         }

@@ -14,10 +14,17 @@
 
 @section top{
 
+
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Library</li>
+            <li class="breadcrumb-item">
+                <a href="/">
+                    @CommonText.Blogs
+                </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+                @CommonText.Edit
+            </li>
         </ol>
     </nav>
 }
@@ -27,7 +34,7 @@
         <a asp-action="delete"
            asp-confirm="true"
            asp-route-id="@Model.Id"
-           class="btn btn-sm btn-danger float-right" 
+           class="btn btn-sm btn-danger float-right"
            style="margin-bottom:5px;">
             <i class="fa fa-trash"></i>
             @CommonText.Delete

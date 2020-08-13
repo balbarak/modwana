@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Modwana.Core.Exceptions;
 using Modwana.Domain.Services;
@@ -10,6 +11,7 @@ using Modwana.Web.ViewModels;
 
 namespace Modwana.Web.Controllers
 {
+    [Authorize]
     public class UserController : BaseController
     {
 
