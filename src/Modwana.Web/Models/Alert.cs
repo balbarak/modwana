@@ -21,17 +21,13 @@ namespace Modwana.Web.Models
             Hide = 5,
         }
 
-        [JsonProperty("isAutoHide")]
         public bool IsAutoHide { get; set; }
 
-        [JsonProperty("message")]
         public string Message { get; set; }
 
-        [JsonProperty("alertType")]
         public Type AlertType { get; set; }
 
-        [JsonProperty("close")]
-        public bool IsDissmisable { get; set; } = true;
+        public bool Close { get; set; } = true;
 
 
 

@@ -268,6 +268,15 @@ namespace Modwana.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to الرجاء ادخال كلمة المرور.
+        /// </summary>
+        public static string PasswordRequired {
+            get {
+                return ResourceManager.GetString("PasswordRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to حقل ({0}) مطلوب..
         /// </summary>
         public static string Required {

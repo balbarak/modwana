@@ -17,6 +17,8 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
+using System.Threading;
+using Microsoft.VisualBasic;
 
 namespace Modwana.Persistance
 {
@@ -103,20 +105,16 @@ namespace Modwana.Persistance
             await SeedDefaultAdminUser();
         }
 
-        public override int SaveChanges()
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             try
             {
-                return base.SaveChanges();
+                return await base.SaveChangesAsync(cancellationToken);
             }
-            catch (Exception ex) when (ex.InnerException is SqlException)
+            catch (Exception ex) when (ex is DbUpdateException)
             {
-                var sqlException = ex.InnerException as SqlException;
+                throw new BusinessException(ex.InnerException?.Message);
 
-                if (sqlException.Number == 547)
-                    throw new BusinessException(MessageText.DatabaseRelatedItemOnDelete);
-                else
-                    throw ex;
             }
         }
 
@@ -133,19 +131,6 @@ namespace Modwana.Persistance
                 await userManager.CreateAsync(user, "1122");
                 await userManager.AddToRoleAsync(user, AppRoles.ADMIN_ROLE);
             }
-            //else
-            //{
-            //    found.Update(user);
-
-            //    await userManager.UpdateAsync(found);
-
-            //    var token = await userManager.GeneratePasswordResetTokenAsync(found);
-
-            //    await userManager.ResetPasswordAsync(found, token, "1122");
-
-            //    await userManager.AddToRoleAsync(found, AppRoles.ADMIN_ROLE);
-            //}
-
         }
 
         private void Seed<T, T2>(DbSet<T> dataSet, Func<T, T2> uniquProperty) where T : class, ISeedableEntity<T>

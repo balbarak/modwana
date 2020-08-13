@@ -59,7 +59,10 @@ namespace Modwana.Web.Controllers
                 msg = GetExceptionError(ex);
             }
 
-            var alert = new Alert(msg, Alert.Type.Error, isAutoHide: isAutoHide);
+            var alert = new Alert(msg, Alert.Type.Error, isAutoHide: isAutoHide)
+            {
+                Close = true
+            };
 
             result.Alert = alert;
             result.Success = false;
@@ -131,5 +134,26 @@ namespace Modwana.Web.Controllers
 
             return false;
         }
+
+        protected async Task<IActionResult> AjaxTask(Func<Task> action, bool setSuccessMessage = true)
+        {
+            JsonResultObject result = new JsonResultObject();
+
+            try
+            {
+                await action.Invoke();
+
+                if (setSuccessMessage)
+                    SetSuccess(result);
+            }
+            catch (BusinessException ex)
+            {
+                SetError(result, ex);
+                return BadRequest(result);
+            }
+
+            return Ok(result);
+        }
+
     }
 }

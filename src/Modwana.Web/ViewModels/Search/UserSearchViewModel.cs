@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Modwana.Web.ViewModels
 {
-    public class AuthorSearchViewModel : BaseSearchViewModel<User>
+    public class UserSearchViewModel : BaseSearchViewModel<User>
     {
 
     }

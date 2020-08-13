@@ -192,4 +192,7 @@
   <data name="SaudiMobile" xml:space="preserve">
     <value>Please enter a valid mobile number (5xxxxxxx)</value>
   </data>
+  <data name="PasswordRequired" xml:space="preserve">
+    <value>Please enter a password</value>
+  </data>
 </root>

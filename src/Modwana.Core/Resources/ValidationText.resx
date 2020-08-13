@@ -192,4 +192,7 @@
   <data name="SaudiMobile" xml:space="preserve">
     <value>الرجاء ادخال رقم جوال صحيح مثال: (5xxxxxxx)</value>
   </data>
+  <data name="PasswordRequired" xml:space="preserve">
+    <value>الرجاء ادخال كلمة المرور</value>
+  </data>
 </root>

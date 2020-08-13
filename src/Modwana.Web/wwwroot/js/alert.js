@@ -97,8 +97,6 @@ function showAlert(alert, alertDiv) {
             default:
         }
 
-
-
         setAlert(option);
     }
 }
@@ -117,10 +115,10 @@ function setAlert(options) {
         icon: "" // put icon before the message
     }, options);
 
-    var html = '<div class="alert alert-' + options.type + ' fade show" role="alert" ">' +
+    var html = '<div class="alert alert-' + options.type + (options.close ? ' alert-dismissible' : '') + ' fade show" role="alert" ">' +
         (options.icon !== "" ? '<i class="' + options.icon + ' "></i> ' : '') +
          options.message  +
-        (options.close ? '<button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true"><i class="la la-close"></i></span></button>' : '');
+        (options.close ? '<button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span></button>' : '');
 
     if (!options.container) {
 

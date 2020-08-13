@@ -12,6 +12,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Modwana.Core.Interfaces;
 using Modwana.Domain.Services;
+using System.Diagnostics;
+using Modwana.Core.Resources;
 
 namespace Modwana.Application.Services
 {
@@ -28,6 +30,9 @@ namespace Modwana.Application.Services
 
         public async Task<User> Add(User entity, string password)
         {
+            if (string.IsNullOrWhiteSpace(password))
+                throw new BusinessException(ValidationText.PasswordRequired);
+
             var userManager = GetUserManager();
 
             if (userManager == null)
@@ -75,6 +80,8 @@ namespace Modwana.Application.Services
 
             if (!result.Succeeded)
                 throw new BusinessException(result.Errors.Select(p => p.Description).ToList());
+
+            //userManager.ChangePasswordAsync()
             
             return entity;
         }

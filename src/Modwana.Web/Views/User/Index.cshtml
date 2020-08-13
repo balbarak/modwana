@@ -1,0 +1,80 @@
+﻿@model SearchResult<User>
+
+
+
+<div class="card">
+    <div class="card-header">
+        <div class="row justify-content-between">
+            <div class="col-3">
+                <h3>
+                    @CommonText.Users
+                </h3>
+            </div>
+            <div class="col-2 align-self-center text-right">
+                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#add-modal">
+                    <i class="fa fa-plus"></i>
+                    @CommonText.Add
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div id="list">
+            <partial name="_List" />
+        </div>
+    </div>
+</div>
+
+
+<modal id="add-modal" asp-is-large="true" asp-content-id="add-content" asp-reset-validation="true">
+    <modal-header></modal-header>
+    <form id="add-form"
+          method="post"
+          asp-ajax="true"
+          asp-action="add"
+          asp-ajax-modal="#add-modal"
+          asp-ajax-success-method="updateListFromDiv('#list');"
+          asp-ajax-error="#add-alert"
+          asp-controller="user"
+          asp-ajax-block="#add-content">
+        <modal-body>
+            <div id="add-alert" data-alert></div>
+            <partial name="_Form" model="new UserViewModel()" />
+        </modal-body>
+        <modal-footer asp-show-close-button="true">
+
+            <button type="submit" class="btn btn-success btn-sm">
+                <i class="fa fa-plus"></i>
+                @CommonText.Add
+            </button>
+        </modal-footer>
+    </form>
+</modal>
+
+
+<modal id="edit-modal" asp-is-large="true" asp-content-id="edit-content">
+    <modal-header></modal-header>
+
+    <form id="edit-form"
+          asp-ajax="true"
+          asp-ajax-block="#edit-content"
+          asp-ajax-modal="#edit-modal"
+          asp-ajax-error="#edit-alert"
+          asp-ajax-success-method="updateListFromDiv('#list');"
+          asp-controller="user"
+          asp-action="update">
+
+        <modal-body>
+            <div id="edit-alert"></div>
+            <div id="edit-div">
+
+            </div>
+        </modal-body>
+        <modal-footer asp-show-close-button="true">
+            <button type="submit" class="btn btn-sm btn-success">
+                <i class="fa fa-save"></i>
+                @CommonText.Save
+            </button>
+        </modal-footer>
+    </form>
+</modal>
