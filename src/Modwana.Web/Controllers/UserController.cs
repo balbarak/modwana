@@ -86,5 +86,15 @@ namespace Modwana.Web.Controllers
                 await _service.Delete(id);
             });
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
+        {
+            return AjaxTask(async () =>
+            {
+                await _service.ChangePassword(model.UserId, model.Password);
+            });
+        }
     }
 }

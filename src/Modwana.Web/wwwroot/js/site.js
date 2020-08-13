@@ -3,6 +3,8 @@ $(function () {
 
     setupConfirm();
 
+    setupResetForms();
+
 })
 
 //========= Start Ajax Setting =========
@@ -352,4 +354,73 @@ function initInlineForms() {
 function showModal(modal) {
 
     $(modal).modal('show');
+}
+
+
+function setupResetForms() {
+
+    var selector = '[data-reset-validation="true"]';
+
+    $(selector).each(function (i) {
+
+        $(this).on('hidden.bs.modal', function (event) {
+
+            var form = $(this).find('form');
+            var alert = $(this).find('[data-alert]');
+
+            if (alert) {
+                $(alert).html('');
+            }
+
+            if (form) {
+                clearFromData(form);
+                clearFormValidation(form);
+                refreshUnobtrusiveValidation(form);
+            }
+        });
+    });
+
+}
+
+function clearFromData(formId) {
+
+    $(formId).trigger('reset');
+
+    $(':input', formId)
+        .not(':button, :submit,:checkbox, :radio, :reset, :input[type=hidden][data-reset!="True"]')
+        .removeAttr('checked')
+        .removeAttr('selected')
+        .val('');
+}
+
+function clearFormValidation(formId) {
+
+    var form = $(formId);
+
+    $('label, input,select, .invalid-feedback', form).each(function (i) {
+
+        $(this)
+            .removeClass('is-valid')
+            .removeClass('text-danger')
+            .removeClass('text-success')
+            .removeClass('is-invalid');
+
+    });
+
+    //Clear validation summary
+    form.find("[data-valmsg-summary=true]")
+        .removeClass("validation-summary-errors")
+        .addClass("validation-summary-valid")
+        .find("ul").empty();
+
+    //reset unobtrusive field level, if it exists
+    form.find("[data-valmsg-replace]")
+        .removeClass("field-validation-error")
+        .addClass("field-validation-valid")
+        .empty();
+
+    form.find("[data-val=true]")
+        .removeClass("text-danger");
+
+    form.find('[data-alert]').empty();
 }

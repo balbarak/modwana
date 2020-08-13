@@ -420,4 +420,7 @@
   <data name="Authors" xml:space="preserve">
     <value>الكتُاب</value>
   </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>تغيير كلمة المرور</value>
+  </data>
 </root>

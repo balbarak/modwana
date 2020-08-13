@@ -414,4 +414,7 @@
   <data name="Authors" xml:space="preserve">
     <value>Authors</value>
   </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Change Password</value>
+  </data>
 </root>

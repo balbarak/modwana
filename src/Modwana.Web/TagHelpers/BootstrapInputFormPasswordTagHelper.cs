@@ -16,6 +16,10 @@ namespace Modwana.Web.TagHelpers
         [HtmlAttributeName("asp-for")]
         public ModelExpression For { get; set; }
 
+
+        [HtmlAttributeName("asp-input-id")]
+        public string InputId { get; set; }
+
         [HtmlAttributeNotBound]
         [ViewContext]
         public ViewContext ViewContext { get; set; }
@@ -58,12 +62,23 @@ namespace Modwana.Web.TagHelpers
 
         private TagBuilder GetInputTag()
         {
-
-            return Generator.GeneratePassword(ViewContext, For.ModelExplorer, For.Name, For.Model, new
+            if (string.IsNullOrWhiteSpace(InputId))
             {
-                @class = "form-control",
-                autocomplete = "off"
-            });
+                return Generator.GeneratePassword(ViewContext, For.ModelExplorer, For.Name, For.Model, new
+                {
+                    @class = "form-control",
+                    autocomplete = "off"
+                });
+            }
+            else
+            {
+                return Generator.GeneratePassword(ViewContext, For.ModelExplorer, For.Name, For.Model, new
+                {
+                    @class = "form-control",
+                    id = InputId,
+                    autocomplete = "off"
+                });
+            }
 
         }
 

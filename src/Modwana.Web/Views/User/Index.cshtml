@@ -78,3 +78,50 @@
         </modal-footer>
     </form>
 </modal>
+
+
+
+<modal id="change-password-modal" 
+       asp-is-large="false" 
+       asp-content-id="change-password-content" 
+       asp-reset-validation="true">
+    <modal-header></modal-header>
+
+    <form id="change-password-form"
+          asp-ajax="true"
+          asp-ajax-block="#change-password-content"
+          asp-ajax-modal="#change-password-modal"
+          asp-ajax-error="#change-password-alert"
+          asp-ajax-success-method="updateListFromDiv('#list');"
+          asp-controller="user"
+          asp-action="ChangePassword">
+
+        <modal-body>
+            <div id="change-password-alert"></div>
+
+            <partial name="_ChangePasswordForm" model="new ChangePasswordViewModel()" />
+
+        </modal-body>
+        <modal-footer asp-show-close-button="true">
+            <button type="submit" class="btn btn-sm btn-success">
+                <i class="fa fa-save"></i>
+                @CommonText.Save
+            </button>
+        </modal-footer>
+    </form>
+</modal>
+
+@section scripts{
+
+    <script type="text/javascript">
+
+        function showChangePasswordModal(id) {
+
+            $("#user-id").val(id);
+
+            showModal("#change-password-modal");
+        }
+
+    </script>
+
+}

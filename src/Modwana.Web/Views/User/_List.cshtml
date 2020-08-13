@@ -87,6 +87,13 @@
                                     @CommonText.Edit
                                 </a>
 
+                                <button type="button" 
+                                        onclick="showChangePasswordModal('@item.Id')" 
+                                        class="btn btn-warning btn-sm">
+
+                                    <i class="fa fa-lock"></i>
+                                    @CommonText.ChangePassword
+                                </button>
                                 <a class="btn btn-sm btn-danger m-btn m-btn--icon"
                                    asp-ajax="true"
                                    asp-confirm="true"
@@ -101,59 +108,6 @@
                                 </a>
                             </div>
 
-                            <div class="dropdown dropdown-inline kt-hidden-desktop">
-                                <button type="button" class="btn btn-clean btn-sm btn-icon btn-icon-md" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="flaticon-more-1"></i>
-                                </button>
-                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-md dropdown-menu-fit" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(32px, 33px, 0px);">
-
-                                    <!--begin::Nav-->
-                                    <ul class="kt-nav">
-
-                                        <li class="kt-nav__head">
-                                            @CommonText.Actions
-                                        </li>
-
-                                        <li class="kt-nav__separator"></li>
-
-                                        <li class="kt-nav__item">
-                                            <a asp-ajax="true"
-                                               asp-ajax-block="#list"
-                                               asp-ajax-replace="#edit-div"
-                                               asp-form-id="#edit-form"
-                                               asp-action="Edit"
-                                               asp-controller="Country"
-                                               asp-ajax-success-method="showModal('#edit-modal')"
-                                               asp-route-id="@item.Id"
-                                               class="kt-nav__link">
-
-                                                <i class="kt-nav__link-icon fa fa-edit"></i>
-                                                <span class="kt-nav__link-text">
-                                                    @CommonText.Edit
-                                                </span>
-                                            </a>
-                                        </li>
-                                        <li class="kt-nav__item">
-                                            <a class="kt-nav__link"
-                                               asp-ajax="true"
-                                               asp-confirm="true"
-                                               asp-action="Delete"
-                                               asp-controller="Country"
-                                               asp-ajax-success-method="updateListFromDiv('#list');"
-                                               asp-route-id="@item.Id"
-                                               asp-ajax-block="#list">
-                                                <i class="kt-nav__link-icon fa fa-trash"></i>
-                                                <span class="kt-nav__link-text">
-                                                    @CommonText.Delete
-                                                </span>
-                                            </a>
-                                        </li>
-
-                                    </ul>
-
-                                    <!--end::Nav-->
-                                </div>
-                            </div>
                         </td>
                     </tr>
                 }

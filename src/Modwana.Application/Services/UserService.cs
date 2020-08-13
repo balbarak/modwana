@@ -66,11 +66,11 @@ namespace Modwana.Application.Services
                 throw new BusinessException(result.Errors.Select(a => a.Description).ToList());
         }
 
-        public async Task<User> Save(User entity,string password = null)
+        public async Task<User> Save(User entity)
         {
             var userManager = GetUserManager();
 
-            var user = userManager.FindByIdAsync(entity.Id).GetAwaiter().GetResult();
+            var user = await userManager.FindByIdAsync(entity.Id);
 
             user = user.Update(entity);
 
@@ -80,12 +80,27 @@ namespace Modwana.Application.Services
 
             if (!result.Succeeded)
                 throw new BusinessException(result.Errors.Select(p => p.Description).ToList());
-
-            //userManager.ChangePasswordAsync()
             
             return entity;
         }
-        
+
+        public async Task ChangePassword(string userId, string password)
+        {
+            var userManager = GetUserManager();
+
+            var user = await userManager.FindByIdAsync(userId);
+
+            if (user == null)
+                throw new BusinessException("User not found.");
+
+            var token = await userManager.GeneratePasswordResetTokenAsync(user);
+
+            var result = await userManager.ResetPasswordAsync(user, token, password);
+
+            if (!result.Succeeded)
+                throw new BusinessException(result.Errors.Select(p => p.Description).ToList());
+        }
+
         public async Task<SearchResult<User>> Search(SearchCriteria<User> search)
         {
             return await _repository.SearchAsync(search,Includes);
