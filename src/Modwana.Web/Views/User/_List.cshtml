@@ -70,44 +70,50 @@
                         <td>
                             @item.CreatedDate.ToSystemDate()
                         </td>
-                        <td class="text-sm-center">
-                            <div class="kt-hidden-mobile">
-                                <a asp-ajax="true"
-                                   asp-ajax-block="#list"
-                                   asp-ajax-replace="#edit-div"
-                                   asp-form-id="#edit-form"
-                                   asp-action="edit"
-                                   asp-controller="user"
-                                   asp-ajax-success-method="showModal('#edit-modal')"
-                                   asp-route-id="@item.Id"
-                                   class="btn btn-sm btn-primary">
+                        <td width="300">
+                            <div class="row justify-content-center">
+                                <div class="col-auto py-1 px-1">
+                                    <a asp-ajax="true"
+                                       asp-ajax-block="#list"
+                                       asp-ajax-replace="#edit-div"
+                                       asp-form-id="#edit-form"
+                                       asp-action="edit"
+                                       asp-controller="user"
+                                       asp-ajax-success-method="showModal('#edit-modal')"
+                                       asp-route-id="@item.Id"
+                                       class="btn btn-sm btn-primary">
 
-                                    <i class="fa fa-edit"></i>
+                                        <i class="fa fa-edit"></i>
 
-                                    @CommonText.Edit
-                                </a>
+                                        @CommonText.Edit
+                                    </a>
+                                </div>
+                                <div class="col-auto py-1 px-1">
 
-                                <button type="button" 
-                                        onclick="showChangePasswordModal('@item.Id')" 
-                                        class="btn btn-warning btn-sm">
+                                    <button type="button"
+                                            onclick="showChangePasswordModal('@item.Id')"
+                                            class="btn btn-warning btn-sm">
 
-                                    <i class="fa fa-lock"></i>
-                                    @CommonText.ChangePassword
-                                </button>
-                                <a class="btn btn-sm btn-danger m-btn m-btn--icon"
-                                   asp-ajax="true"
-                                   asp-confirm="true"
-                                   asp-action="delete"
-                                   asp-controller="user"
-                                   asp-ajax-success-method="updateListFromDiv('#list');"
-                                   asp-route-id="@item.Id"
-                                   asp-ajax-block="#list">
-                                    <i class="fa fa-trash"></i>
-                                    @CommonText.Delete
+                                        <i class="fa fa-lock"></i>
+                                        @CommonText.ChangePassword
+                                    </button>
+                                </div>
+                                <div class="col-auto py-1 px-1">
 
-                                </a>
+                                    <a class="btn btn-sm btn-danger m-btn m-btn--icon"
+                                       asp-ajax="true"
+                                       asp-confirm="true"
+                                       asp-action="delete"
+                                       asp-controller="user"
+                                       asp-ajax-success-method="updateListFromDiv('#list');"
+                                       asp-route-id="@item.Id"
+                                       asp-ajax-block="#list">
+                                        <i class="fa fa-trash"></i>
+                                        @CommonText.Delete
+
+                                    </a>
+                                </div>
                             </div>
-
                         </td>
                     </tr>
                 }

@@ -47,22 +47,45 @@
     </div>
     <div class="container">
         <main role="main" class="pb-3">
-            
-            @RenderSection("top",false)
+
+            @RenderSection("top", false)
 
             <div id="alert"></div>
-            
+
             @RenderBody()
         </main>
     </div>
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; @DateTime.Now.Year - @CommonText.AppName 
+
+            <div class="row justify-content-between">
+                <div class="col-4">
+                    &copy; @DateTime.Now.Year - @CommonText.AppName
+                </div>
+                <div class="col-4 text-right" dir="ltr">
+
+                    <a href="https://twitter.com/balbarak" target="_blank">
+                        <i class="fa fa-twitter"></i>
+                        Twitter
+                    </a>
+
+                    <a href="https://github.com/balbarak" target="_blank">
+                        <i class="fa fa-github"></i>
+                        Github
+                    </a>
+
+                    <a href="mailto:balbarak@live.com">
+                        <i class="fa fa-envelope-o"></i>
+                        balbarak@live.com
+                    </a>
+
+                </div>
+            </div>
         </div>
     </footer>
 
-    <partial name="_Confirm"/>
+    <partial name="_Confirm" />
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

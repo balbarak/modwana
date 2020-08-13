@@ -20,7 +20,7 @@
                 </a>
             </li>
             <li class="breadcrumb-item active" aria-current="page">
-                @Model.Title
+                @Model.Title?.Brief(20)
             </li>
         </ol>
     </nav>

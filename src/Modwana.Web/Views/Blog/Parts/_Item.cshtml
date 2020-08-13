@@ -27,12 +27,16 @@
         </p>
         <p>
             <a asp-action="details" asp-controller="blog" asp-route-id="@Model.Id" class="btn btn-primary btn-sm">
+                <i class="fa fa-readme"></i>
                 @CommonText.ReadMore
             </a>
-            <a asp-action="edit" asp-controller="blog" asp-route-id="@Model.Id" class="btn btn-info btn-sm">
-                <i class="fa fa-edit"></i>
-                @CommonText.Edit
-            </a>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <a asp-action="edit" asp-controller="blog" asp-route-id="@Model.Id" class="btn btn-info btn-sm">
+                    <i class="fa fa-edit"></i>
+                    @CommonText.Edit
+                </a>
+            }
         </p>
     </div>
 </div>
