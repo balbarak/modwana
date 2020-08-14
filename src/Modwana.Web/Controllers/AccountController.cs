@@ -40,7 +40,7 @@ namespace Modwana.Web.Controllers
 
                 SignInResult result = null;
 
-                result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, true, lockoutOnFailure: true);
+                result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, true,true);
 
                 if (result.IsLockedOut)
                     throw new BusinessException(MessageText.AccountLocked);

@@ -129,7 +129,6 @@ namespace Modwana.Persistance
             if (found == null)
             {
                 await userManager.CreateAsync(user, "1122");
-                await userManager.AddToRoleAsync(user, AppRoles.ADMIN_ROLE);
             }
         }
 
@@ -182,10 +181,14 @@ namespace Modwana.Persistance
                 UserName = email,
                 Author = new Author()
                 {
-                    Id = id,
                     Name = "Admin"
                 }
             };
+
+            user.Roles.Add(new IdentityUserRole<string>()
+            {
+                RoleId = AppRoles.ADMIN_ROLE
+            });
 
             return user;
         }

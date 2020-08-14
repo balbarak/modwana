@@ -62,6 +62,8 @@ namespace Modwana.Web.Controllers
 
             var model = new UserViewModel(user);
 
+            ViewBag.IsEdit = true;  
+
             return PartialView("_Form", model);
         }
 

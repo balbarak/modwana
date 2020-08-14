@@ -25,43 +25,12 @@ namespace Modwana.Application.Identities
             this.Options = GetDefaultOptions();
         }
 
-        public static ModwanaUserManager Create()
-        {
-            ModwanaDbContext context = new ModwanaDbContext();
-
-            IUserStore<User> userStore = new UserStore<User, Role, ModwanaDbContext>(context);
-
-            IdentityOptions options = GetDefaultOptions();
-
-            IOptions<IdentityOptions> optionResult = Microsoft.Extensions.Options.Options.Create(options);
-
-            IPasswordHasher<User> passwordHasher = new PasswordHasher<User>();
-
-            ModwanaIdentityErrorDescriber errorDescriber = new ModwanaIdentityErrorDescriber();
-
-            List<UserValidator<User>> validators = new List<UserValidator<User>>();
-            UserValidator<User> validator = new UserValidator<User>(errorDescriber);
-            validators.Add(validator);
-
-            List<PasswordValidator<User>> passwordValidators = new List<PasswordValidator<User>>();
-            PasswordValidator<User> passwordValidator = new PasswordValidator<User>(errorDescriber);
-            passwordValidators.Add(passwordValidator);
-
-            UpperInvariantLookupNormalizer normalizer = new UpperInvariantLookupNormalizer();
-            
-            var logger = AppLogger.LoggerFactory?.CreateLogger<ModwanaUserManager>();
-            
-            return new ModwanaUserManager(userStore, optionResult, passwordHasher, validators, passwordValidators, normalizer, errorDescriber, null, logger);
-        }
-
         public static IdentityOptions GetDefaultOptions()
         {
             IdentityOptions options = new IdentityOptions()
             {
-
                 SignIn = new SignInOptions()
                 {
-
                     RequireConfirmedEmail = false,
                     RequireConfirmedPhoneNumber = false,
                 },
@@ -71,9 +40,8 @@ namespace Modwana.Application.Identities
                 },
                 Lockout = new LockoutOptions()
                 {
-                    DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15),
-                    AllowedForNewUsers = false,
-                    MaxFailedAccessAttempts = 10,
+                    AllowedForNewUsers = true,
+                    MaxFailedAccessAttempts = 3,
                 },
                 Password = new PasswordOptions()
                 {
@@ -83,7 +51,6 @@ namespace Modwana.Application.Identities
                     RequireLowercase = false,
                     RequireNonAlphanumeric = false,
                     RequireUppercase = false
-
                 }
             };
 

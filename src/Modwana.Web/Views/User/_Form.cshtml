@@ -1,18 +1,27 @@
 ﻿
 @model UserViewModel
 
-<input type="hidden" asp-for="Id"/>
+@{
+    bool isEdit = ViewBag.IsEdit ?? false;
+}
+
+<input type="hidden" asp-for="Id" />
+
 
 <bootstrap-input-form-group asp-for="Name" />
 
 <bootstrap-input-form-group asp-for="Email" />
 
-<div class="row">
-    <div class="col-lg-6">
-        <bootstrap-password-form-group asp-for="Password"/>
+
+@if (!isEdit)
+{
+    <div class="row">
+        <div class="col-lg-6">
+            <bootstrap-password-form-group asp-for="Password" />
+        </div>
+        <div class="col-lg-6">
+            <bootstrap-password-form-group asp-for="ConfirmPassword" />
+        </div>
     </div>
-    <div class="col-lg-6">
-        <bootstrap-password-form-group asp-for="ConfirmPassword" />
-    </div>
-</div>
+}
 
