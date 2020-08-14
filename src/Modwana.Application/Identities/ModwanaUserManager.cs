@@ -40,8 +40,9 @@ namespace Modwana.Application.Identities
                 },
                 Lockout = new LockoutOptions()
                 {
+                    DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15),
                     AllowedForNewUsers = true,
-                    MaxFailedAccessAttempts = 3,
+                    MaxFailedAccessAttempts = 5,
                 },
                 Password = new PasswordOptions()
                 {
