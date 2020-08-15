@@ -1,0 +1,2 @@
+
+ dotnet ef migrations add init --project "../Modwana.Persistance" --context SqliteDbContext --output-dir "../Modwana.Persistance/Migrations/Sqlite"

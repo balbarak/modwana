@@ -7,10 +7,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Modwana.Persistance;
 
-namespace Modwana.Persistance.Migrations
+namespace Modwana.Persistance.Migrations.Sqlite
 {
-    [DbContext(typeof(ModwanaDbContext))]
-    [Migration("20200814150711_init")]
+    [DbContext(typeof(SqliteDbContext))]
+    [Migration("20200815015520_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

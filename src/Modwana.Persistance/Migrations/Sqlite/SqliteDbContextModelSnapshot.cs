@@ -6,10 +6,10 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Modwana.Persistance;
 
-namespace Modwana.Persistance.Migrations
+namespace Modwana.Persistance.Migrations.Sqlite
 {
-    [DbContext(typeof(ModwanaDbContext))]
-    partial class ModwanaDbContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(SqliteDbContext))]
+    partial class SqliteDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {

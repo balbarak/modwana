@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Modwana.Persistance.Migrations
+namespace Modwana.Persistance.Migrations.Sqlite
 {
     public partial class init : Migration
     {
