@@ -25,7 +25,7 @@ namespace Modwana.Persistance.Repositories
 
         public virtual async Task<TEntity> CreateAsync<TEntity>(TEntity entity) where TEntity : class, IBaseEntity
         {
-            ModwanaDbContext context = _context ?? new ModwanaDbContext();
+            ModwanaDbContext context = _context ?? DbContextFactory.Create();
 
             var dbSet = context.Set<TEntity>();
 
@@ -45,7 +45,7 @@ namespace Modwana.Persistance.Repositories
 
         public virtual async Task<TEntity> UpdateAsync<TEntity>(TEntity entityToUpdate) where TEntity : class, IBaseEntity
         {
-            ModwanaDbContext context = _context ?? new ModwanaDbContext();
+            ModwanaDbContext context = _context ?? DbContextFactory.Create();
 
             if (entityToUpdate is AuditableEntity auditableEntity)
                 auditableEntity.UpdateAudit();
@@ -63,7 +63,7 @@ namespace Modwana.Persistance.Repositories
 
         public virtual async Task DeleteAsync<TEntity>(string id) where TEntity : class, IBaseEntity
         {
-            ModwanaDbContext context = _context ?? new ModwanaDbContext();
+            ModwanaDbContext context = _context ?? DbContextFactory.Create();
 
             var dbSet = context.Set<TEntity>();
 
@@ -80,7 +80,7 @@ namespace Modwana.Persistance.Repositories
 
         public virtual async Task<int> CountAsync<TEntity>() where TEntity : class, IBaseEntity
         {
-            ModwanaDbContext context = _context ?? new ModwanaDbContext();
+            ModwanaDbContext context = _context ?? DbContextFactory.Create();
 
             var dbSet = context.Set<TEntity>();
 
@@ -96,7 +96,7 @@ namespace Modwana.Persistance.Repositories
 
         public virtual async Task<int> CountAsync<TEntity>(SearchCriteria<TEntity> search) where TEntity : class, IBaseEntity
         {
-            ModwanaDbContext context = _context ?? new ModwanaDbContext();
+            ModwanaDbContext context = _context ?? DbContextFactory.Create();
 
             var dbSet = context.Set<TEntity>();
 
@@ -117,7 +117,7 @@ namespace Modwana.Persistance.Repositories
 
         public virtual async Task<int> CountAsync<TEntity>(Expression<Func<TEntity, bool>> filter) where TEntity : class, IBaseEntity
         {
-            ModwanaDbContext context = _context ?? new ModwanaDbContext();
+            ModwanaDbContext context = _context ?? DbContextFactory.Create();
 
             var dbSet = context.Set<TEntity>();
 
@@ -135,7 +135,7 @@ namespace Modwana.Persistance.Repositories
 
         public virtual async Task<SearchResult<TEntity>> SearchAsync<TEntity>(SearchCriteria<TEntity> searchCriteria, params string[] includes) where TEntity : class, IBaseEntity
         {
-            ModwanaDbContext context = _context ?? new ModwanaDbContext();
+            ModwanaDbContext context = _context ?? DbContextFactory.Create();
 
             var dbSet = context.Set<TEntity>();
 
@@ -177,7 +177,7 @@ namespace Modwana.Persistance.Repositories
 
         public virtual async Task<TEntity> GetByIdAsync<TEntity>(string id, params string[] includes) where TEntity : class, IBaseEntity
         {
-            ModwanaDbContext context = _context ?? new ModwanaDbContext();
+            ModwanaDbContext context = _context ?? DbContextFactory.Create();
 
             var dbSet = context.Set<TEntity>();
 
@@ -205,7 +205,7 @@ namespace Modwana.Persistance.Repositories
          Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
          string[] includeProperties = null, int? maxSize = null) where TEntity : class, IBaseEntity
         {
-            ModwanaDbContext context = _context ?? new ModwanaDbContext();
+            ModwanaDbContext context = _context ?? DbContextFactory.Create();
 
             var dbSet = context.Set<TEntity>();
 

@@ -7,7 +7,7 @@ namespace Modwana.Persistance
 {
     public class UnitOfWork : IDisposable
     {
-        public readonly ModwanaDbContext Context = new ModwanaDbContext();
+        public readonly ModwanaDbContext Context = DbContextFactory.Create();
 
         private GenericRepository _genericRepository;
 
