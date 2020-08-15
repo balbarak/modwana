@@ -1,17 +1,19 @@
-﻿using Modwana.Persistance.Repositories;
+﻿using Modwana.Core.Interfaces;
+using Modwana.Persistance.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Modwana.Persistance
 {
-    public class UnitOfWork : IDisposable
+    public class UnitOfWork : IDisposable , IUnitOfWork
     {
         public readonly ModwanaDbContext Context = DbContextFactory.Create();
 
-        private GenericRepository _genericRepository;
+        private IGenericRepository _genericRepository;
 
-        public GenericRepository GenericRepository
+        public IGenericRepository GenericRepository
         {
             get
             {
@@ -23,9 +25,9 @@ namespace Modwana.Persistance
 
         }
 
-        public int Commit()
+        public Task<int> Commit()
         {
-            return Context.SaveChanges();
+            return Context.SaveChangesAsync();
         }
 
         private bool disposed = false;

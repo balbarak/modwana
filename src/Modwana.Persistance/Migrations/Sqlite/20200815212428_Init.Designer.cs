@@ -9,7 +9,7 @@ using Modwana.Persistance;
 namespace Modwana.Persistance.Migrations.Sqlite
 {
     [DbContext(typeof(SqliteDbContext))]
-    [Migration("20200815142238_Init")]
+    [Migration("20200815212428_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -163,6 +163,41 @@ namespace Modwana.Persistance.Migrations.Sqlite
                     b.HasIndex("AuthorId");
 
                     b.ToTable("Blogs");
+                });
+
+            modelBuilder.Entity("Modwana.Domain.Models.Comment", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT")
+                        .HasMaxLength(128);
+
+                    b.Property<string>("BlogId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("IPAddress")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Text")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UserAgent")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BlogId");
+
+                    b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("Modwana.Domain.Models.Role", b =>
@@ -328,6 +363,14 @@ namespace Modwana.Persistance.Migrations.Sqlite
                     b.HasOne("Modwana.Domain.Models.Author", "Author")
                         .WithMany()
                         .HasForeignKey("AuthorId");
+                });
+
+            modelBuilder.Entity("Modwana.Domain.Models.Comment", b =>
+                {
+                    b.HasOne("Modwana.Domain.Models.Blog", "Blog")
+                        .WithMany("Comments")
+                        .HasForeignKey("BlogId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Modwana.Domain.Models.Role", b =>

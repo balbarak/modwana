@@ -16,11 +16,7 @@
                 <i class="fa fa-calendar-o"></i>
                 @Model.CreatedDate.ToSystemDate()
             </li>
-            <li class="list-inline-item">
-                <i class="fa fa-comment-o"></i>
-                12
-            </li>
-
+            
         </ul>
         <p>
             @Model.Body.StripHtml()?.Brief(300)

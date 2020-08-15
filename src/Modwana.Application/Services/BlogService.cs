@@ -4,6 +4,7 @@ using Modwana.Core.Interfaces;
 using Modwana.Core.Search;
 using Modwana.Domain.Models;
 using Modwana.Domain.Services;
+using Modwana.Persistance;
 using System;
 using System.Collections.Generic;
 using System.Security.Principal;
@@ -36,9 +37,18 @@ namespace Modwana.Application.Services
             return _repository.UpdateAsync(entity);
         }
 
-        public Task<Blog> GetById(string id)
+        public async Task<Blog> GetById(string id)
         {
-            return _repository.GetByIdAsync<Blog>(id, Includes);
+            Blog result;
+
+            using (IUnitOfWork work = UnitOfWorkFactory.Create())
+            {
+                result = await work.GenericRepository.GetByIdAsync<Blog>(id, Includes);
+
+                result.NumberOfComments = await work.GenericRepository.CountAsync<Comment>(a => a.BlogId == result.Id);
+            }
+
+            return result;
         }
 
         public Task Delete(string id)

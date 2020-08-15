@@ -13,31 +13,41 @@
             <div class="col-12">
                 <div class="media">
                     <div class="media-body">
-                        <h5 class="mt-0">
-                            @item.Name
-                            <br />
-                            <small class="text-muted">
-                                <i class="fa fa-calendar"></i>
-                                @item.Date.ToSystemDate()
-                            </small>
-                        </h5>
+
+                        <div class="row justify-content-between">
+                            <div class="col-6">
+
+                                <h5 class="mt-0">
+                                    @item.Name
+                                </h5>
+                                <ul class="list-inline">
+                                    <li class="list-inline-item">
+                                        <i class="fa fa-calendar"></i>
+                                        @item.Date.ToSystemDate()
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-6 align-self-center text-right">
+                                @if (item.IsAllowedToDelete())
+                                {
+                                    <a asp-action="delete"
+                                       asp-controller="comment"
+                                       asp-ajax="true"
+                                       asp-confirm="true"
+                                       asp-route-id="@item.Id"
+                                       asp-ajax-success-method="updateListFromDiv('#comment-list')"
+                                       asp-ajax-block="#comment-list"
+                                       class="btn btn-sm btn-outline-danger btn-sm">
+                                        <i class="fa fa-trash"></i>
+                                        @CommonText.Delete
+                                    </a>
+                                }
+                            </div>
+                        </div>
                         <p style="white-space:pre-line">
                             @item.Text
                         </p>
-                        @if (item.IsAllowedToDelete())
-                        {
-                            <a asp-action="delete"
-                               asp-controller="comment"
-                               asp-ajax="true"
-                               asp-confirm="true"
-                               asp-route-id="@item.Id"
-                               asp-ajax-success-method="updateListFromDiv('#comment-list')"
-                               asp-ajax-block="#comment-list"
-                               class="btn btn-sm btn-outline-danger btn-sm">
-                                <i class="fa fa-trash"></i>
-                                @CommonText.Delete
-                            </a>
-                        }
+                        
                     </div>
                 </div>
 

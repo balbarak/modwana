@@ -22,6 +22,8 @@ namespace Modwana.Core.Interfaces
 
         Task<int> CountAsync<TEntity>() where TEntity : class, IBaseEntity;
 
+        Task<int> CountAsync<TEntity>(Expression<Func<TEntity, bool>> filter) where TEntity : class, IBaseEntity;
+
         Task<IEnumerable<TEntity>> GetAsync<TEntity>(
          Expression<Func<TEntity, bool>> filter = null,
          Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,

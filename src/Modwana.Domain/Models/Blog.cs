@@ -3,6 +3,7 @@ using Modwana.Core.Helpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Modwana.Domain.Models
@@ -23,6 +24,9 @@ namespace Modwana.Domain.Models
         public Author Author { get; set; }
 
         public ICollection<Comment> Comments { get; private set; } = new HashSet<Comment>();
+
+        [NotMapped]
+        public int NumberOfComments { get; set; }
 
         public Blog()
         {
