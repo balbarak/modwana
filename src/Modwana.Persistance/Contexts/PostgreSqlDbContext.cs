@@ -12,7 +12,7 @@ namespace Modwana.Persistance
             if (optionsBuilder.IsConfigured)
                 return;
 
-            optionsBuilder.UseNpgsql("Host=localhost;Database=ModwanaDb;Username=balbarak;Password=1122");
+            optionsBuilder.UseNpgsql($"Host={Settings.Host};Database={Settings.Database};Username={Settings.User};Password={Settings.Password}");
 
 
             base.OnConfiguring(optionsBuilder);

@@ -25,7 +25,7 @@ namespace Modwana.Persistance
     public class ModwanaDbContext : IdentityDbContext<User, Role, string>
     {
 
-        public AppSettings Settings => ServiceLocator.Current.GetService<IOptions<AppSettings>>()?.Value;
+        public DatabaseSettings Settings => ServiceLocator.Current.GetService<IOptions<DatabaseSettings>>()?.Value;
 
         public DbSet<Blog> Blogs { get; set; }
 

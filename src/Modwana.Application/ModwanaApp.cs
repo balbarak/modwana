@@ -19,18 +19,25 @@ namespace Modwana.Application
     {
         public static void Init(IServiceCollection services, IConfiguration configuration)
         {
-            var appSettings = new AppSettings();
-            configuration.GetSection(nameof(AppSettings)).Bind(appSettings);
+            var databaseSettings = new DatabaseSettings();
+            configuration.GetSection(nameof(DatabaseSettings)).Bind(databaseSettings);
 
-            _ = appSettings.DatabaseType switch
+            _ = databaseSettings.Type switch
             {
-                DatabaseType.Postgress => services.AddDbContext<ModwanaDbContext, PostgreSqlDbContext>(ServiceLifetime.Transient),
-                DatabaseType.Sqlite => services.AddDbContext<ModwanaDbContext, SqliteDbContext>(ServiceLifetime.Transient),
-                DatabaseType.MSSQL => services.AddDbContext<ModwanaDbContext, SqlDbContext>(ServiceLifetime.Transient),
-                _ => services.AddDbContext<ModwanaDbContext, SqliteDbContext>(ServiceLifetime.Transient),
+                DatabaseSettings.DatabaseType.Postgress => 
+                services.AddDbContext<ModwanaDbContext, PostgreSqlDbContext>(ServiceLifetime.Transient),
+                
+                DatabaseSettings.DatabaseType.Sqlite => 
+                services.AddDbContext<ModwanaDbContext, SqliteDbContext>(ServiceLifetime.Transient),
+                
+                DatabaseSettings.DatabaseType.MSSQL => 
+                services.AddDbContext<ModwanaDbContext, SqlDbContext>(ServiceLifetime.Transient),
+                
+                _ =>
+                services.AddDbContext<ModwanaDbContext, SqliteDbContext>(ServiceLifetime.Transient),
             };
 
-            services.Configure<AppSettings>(configuration.GetSection(nameof(AppSettings)));
+            services.Configure<DatabaseSettings>(configuration.GetSection(nameof(DatabaseSettings)));
 
             services.AddTransient<IUserService, UserService>();
 
@@ -39,7 +46,6 @@ namespace Modwana.Application
             services.AddTransient<IModwanaUserManager<User>, ModwanaUserManager>();
 
             services.AddTransient<IBlogService, BlogService>();
-
         }
     }
 }

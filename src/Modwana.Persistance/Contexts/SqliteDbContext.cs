@@ -12,10 +12,10 @@ namespace Modwana.Persistance
             if (optionsBuilder.IsConfigured)
                 return;
 
-            if (string.IsNullOrWhiteSpace(Settings.SqliteFilePath))
-                throw new ArgumentNullException($"The value of ({nameof(Settings.SqliteFilePath)}) in app settings cannot be null when use Sqlite");
+            if (string.IsNullOrWhiteSpace(Settings.FilePath))
+                throw new ArgumentNullException($"The value of DatabaseSettings:({nameof(Settings.FilePath)}) in app settings cannot be null when use Sqlite");
 
-            optionsBuilder.UseSqlite($"Filename={Settings.SqliteFilePath}");
+            optionsBuilder.UseSqlite($"Filename={Settings.FilePath}");
         }
     }
 }

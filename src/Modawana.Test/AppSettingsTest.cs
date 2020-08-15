@@ -12,11 +12,11 @@ namespace Modwana.Test
         [Fact]
         public void Should_Read_Settings_From_Json_Config()
         {
-            var settings = ServiceLocator.Current.GetService<IOptions<AppSettings>>()?.Value;
+            var settings = ServiceLocator.Current.GetService<IOptions<DatabaseSettings>>()?.Value;
 
-            Assert.Equal("Modwana.db", settings.SqliteFilePath);
+            Assert.Equal("Modwana.db", settings.FilePath);
 
-            Assert.Equal(DatabaseType.Sqlite,settings.DatabaseType);
+            Assert.Equal( DatabaseSettings.DatabaseType.Sqlite,settings.Type);
 
         }
     }
