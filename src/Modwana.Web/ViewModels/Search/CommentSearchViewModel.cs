@@ -11,6 +11,11 @@ namespace Modwana.Web.ViewModels
     {
         public string BlogId { get; set; }
 
+        public CommentSearchViewModel()
+        {
+            PageSize = 5;
+        }
+
         public override SearchCriteria<Comment> ToSearchModel()
         {
             if (!string.IsNullOrWhiteSpace(BlogId))
