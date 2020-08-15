@@ -37,6 +37,9 @@ namespace Modwana.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
+            ModwanaApp.Init(services, Configuration);
+
+
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
             services.AddHttpContextAccessor();
@@ -55,8 +58,7 @@ namespace Modwana.Web
 
             services.AddTransient<IPrincipal>((provider) => provider.GetService<IHttpContextAccessor>().HttpContext?.User);
 
-            ModwanaApp.Init(services, Configuration);
-
+            
             ServiceLocator.Configure(services);
         }
 

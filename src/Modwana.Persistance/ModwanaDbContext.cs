@@ -41,41 +41,6 @@ namespace Modwana.Persistance
 
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (optionsBuilder.IsConfigured)
-                return;
-
-            var connectionString = AppSettings.Configuration.GetConnectionString("DefaultConnection");
-
-            switch (Settings.DatabaseType)
-            {
-                case DatabaseType.Sqlite:
-
-                    if (string.IsNullOrWhiteSpace(Settings.SqliteFilePath))
-                        throw new ArgumentNullException($"The value of ({nameof(Settings.SqliteFilePath)}) in app settings cannot be null when use Sqlite");
-
-                    optionsBuilder.UseSqlite($"Filename={Settings.SqliteFilePath}");
-
-                    break;
-                case DatabaseType.Postgress:
-
-                    
-                    break;
-
-                case DatabaseType.MSSQL:
-
-                    optionsBuilder.UseSqlServer(connectionString);
-
-                    break;
-                default:
-                    break;
-            }
-
-            base.OnConfiguring(optionsBuilder);
-
-        }
-
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -95,7 +60,6 @@ namespace Modwana.Persistance
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);
         }
-
 
         public async Task EnsureSeeding()
         {

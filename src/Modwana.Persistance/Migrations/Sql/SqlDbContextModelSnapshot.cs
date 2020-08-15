@@ -3,17 +3,15 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Modwana.Persistance;
 
-namespace Modwana.Persistance.Migrations.Sqlite
+namespace Modwana.Persistance.Migrations.Sql
 {
-    [DbContext(typeof(SqliteDbContext))]
-    [Migration("20200815015520_init")]
-    partial class init
+    [DbContext(typeof(SqlDbContext))]
+    partial class SqlDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

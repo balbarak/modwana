@@ -1,22 +1,22 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Modwana.Core;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Modwana.Persistance
 {
-    public class PostgreSqlDbContext : ModwanaDbContext
+    public class SqlDbContext : ModwanaDbContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (optionsBuilder.IsConfigured)
                 return;
 
-            optionsBuilder.UseNpgsql("Host=localhost;Database=ModwanaDb;Username=balbarak;Password=1122");
+            var connectionString = AppSettings.Configuration.GetConnectionString("DefaultConnection");
 
-
-            base.OnConfiguring(optionsBuilder);
-
+            optionsBuilder.UseSqlServer(connectionString);
         }
     }
 }
