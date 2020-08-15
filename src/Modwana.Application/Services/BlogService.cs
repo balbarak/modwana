@@ -22,7 +22,7 @@ namespace Modwana.Application.Services
             };
         }
 
-        public Task Add(Blog entity)
+        public Task<Blog> Add(Blog entity)
         {
             var principal = ServiceLocator.Current.GetService<IPrincipal>();
 
@@ -31,7 +31,7 @@ namespace Modwana.Application.Services
             return _repository.CreateAsync(entity);
         }
 
-        public Task Save(Blog entity)
+        public Task<Blog> Save(Blog entity)
         {
             return _repository.UpdateAsync(entity);
         }

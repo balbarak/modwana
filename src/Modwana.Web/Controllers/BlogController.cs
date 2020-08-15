@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Modwana.Core.Exceptions;
+using Modwana.Domain.Models;
 using Modwana.Domain.Services;
 using Modwana.Web.ViewModels;
 
@@ -40,11 +41,13 @@ namespace Modwana.Web.Controllers
         [Authorize]
         public async Task<IActionResult> Add(BlogViewModel model)
         {
+            Blog blog;
+
             try
             {
                 ValidateModelState();
 
-                await _service.Add(model.ToModel());
+                blog = await _service.Add(model.ToModel());
 
                 SetSuccess();
             }
@@ -55,7 +58,7 @@ namespace Modwana.Web.Controllers
                 return View(model);
             }
 
-            return RedirectToAction("index");
+            return RedirectToAction("details",new { id = blog.Id });
         }
 
         [Authorize]

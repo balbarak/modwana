@@ -9,11 +9,12 @@ namespace Modwana.Domain.Services
 {
     public interface IBlogService
     {
-        Task Add(Blog entity);
+        Task<Blog> Add(Blog entity);
 
-        Task Save(Blog entity);
+        Task<Blog> Save(Blog entity);
 
         Task Delete(string id);
+
         Task<SearchResult<Blog>> Search(SearchCriteria<Blog> search);
         Task<Blog> GetById(string id);
     }

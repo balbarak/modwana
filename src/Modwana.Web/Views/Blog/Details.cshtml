@@ -54,6 +54,16 @@
     </div>
 </div>
 
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="card">
+        <div class="card-body">
+            <a asp-action="edit" asp-route-id="@Model.Id" class="btn btn-primary btn-sm">
+                @CommonText.Edit
+            </a>
+        </div>
+    </div>
+}
 
 @section scripts{
     <script src="~/prism/prism.js"></script>
