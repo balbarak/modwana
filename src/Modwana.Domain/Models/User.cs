@@ -19,6 +19,8 @@ namespace Modwana.Domain.Models
 
         public Author Author { get; set; }
 
+        public bool IsMain { get; set; }
+
         public User()
         {
             this.CreatedDate = DateTime.Now;

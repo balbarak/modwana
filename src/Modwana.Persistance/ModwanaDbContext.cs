@@ -145,6 +145,7 @@ namespace Modwana.Persistance
                 Id = id,
                 Email = email,
                 UserName = email,
+                IsMain = true,
                 Author = new Author()
                 {
                     Name = "Admin"
