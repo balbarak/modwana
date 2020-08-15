@@ -22,6 +22,8 @@ namespace Modwana.Domain.Models
 
         public Author Author { get; set; }
 
+        public ICollection<Comment> Comments { get; private set; } = new HashSet<Comment>();
+
         public Blog()
         {
             CreatedDate = SystemDate.Now;

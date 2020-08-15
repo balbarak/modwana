@@ -366,8 +366,9 @@ namespace Modwana.Persistance.Migrations.Sqlite
             modelBuilder.Entity("Modwana.Domain.Models.Comment", b =>
                 {
                     b.HasOne("Modwana.Domain.Models.Blog", "Blog")
-                        .WithMany()
-                        .HasForeignKey("BlogId");
+                        .WithMany("Comments")
+                        .HasForeignKey("BlogId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Modwana.Domain.Models.Role", b =>

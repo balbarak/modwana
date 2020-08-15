@@ -61,6 +61,11 @@ namespace Modwana.Persistance
                 .HasForeignKey(e => e.UserId)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<Blog>()
+                .HasMany(a => a.Comments)
+                .WithOne(a => a.Blog)
+                .OnDelete(DeleteBehavior.Cascade);
         }
 
         public async Task EnsureSeeding()
