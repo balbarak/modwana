@@ -1,0 +1,79 @@
+﻿@model SearchResult<Comment>
+
+@{
+    var search = Model.SearchCriteria as CommentSearchViewModel;
+}
+
+@if (Model.Result.Any())
+{
+
+    <div class="row">
+        @foreach (var item in Model.Result)
+        {
+            <div class="col-12">
+                <div class="media">
+                    <div class="media-body">
+                        <h5 class="mt-0">
+                            @item.Name
+                            <br />
+                            <small class="text-muted">
+                                <i class="fa fa-calendar"></i>
+                                @item.Date.ToSystemDate()
+                            </small>
+                        </h5>
+                        <p style="white-space:pre-line">
+                            @item.Text
+                        </p>
+                        @if (item.IsAllowedToDelete())
+                        {
+                            <a asp-action="delete"
+                               asp-controller="comment"
+                               asp-ajax="true"
+                               asp-confirm="true"
+                               asp-route-id="@item.Id"
+                               asp-ajax-success-method="updateListFromDiv('#comment-list')"
+                               asp-ajax-block="#comment-list"
+                               class="btn btn-sm btn-outline-danger btn-sm">
+                                <i class="fa fa-trash"></i>
+                                @CommonText.Delete
+                            </a>
+                        }
+                    </div>
+                </div>
+
+                <hr />
+            </div>
+        }
+    </div>
+
+    <cs-pager cs-pager-ul-class="pagination pagination-sm"
+              cs-pager-li-other-class="page-item"
+              cs-pager-link-other-class="page-link"
+              cs-pager-li-current-class="page-item active"
+              cs-pager-link-current-class="page-link"
+              cs-paging-pagesize="@Model.PageSize"
+              cs-paging-pagenumber="@Model.PageNumber"
+              cs-paging-totalitems="@Model.TotalResultsCount"
+              asp-all-route-data="@search.ToRouteValueDictionary()"
+              cs-ajax-target="#list"
+              cs-ajax-begin="block('#list')"
+              cs-ajax-complete="unblock('#list')"
+              asp-controller="Blog"
+              asp-action="Index">
+
+    </cs-pager>
+    <strong>
+        @CommonText.Total:
+    </strong>
+    @Model.TotalResultsCount.ToString("N0")
+}
+else
+{
+
+    <div class="alert alert-info" role="alert">
+        لا يوجد تعليقات
+    </div>
+}
+
+
+<input type="hidden" data-route value="@Url.RouteUrl(search.ToRouteValueDictionary(true))" />

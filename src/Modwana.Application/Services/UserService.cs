@@ -60,6 +60,9 @@ namespace Modwana.Application.Services
             if (account == null)
                 return;
 
+            if (account.IsMain)
+                throw new BusinessException(MessageText.YouCannotDeleteThisAccounts);
+
             var result = await userManager.DeleteAsync(account);
 
             if (!result.Succeeded)

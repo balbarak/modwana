@@ -163,6 +163,41 @@ namespace Modwana.Persistance.Migrations.Sqlite
                     b.ToTable("Blogs");
                 });
 
+            modelBuilder.Entity("Modwana.Domain.Models.Comment", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT")
+                        .HasMaxLength(128);
+
+                    b.Property<string>("BlogId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("IPAddress")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Text")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UserAgent")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BlogId");
+
+                    b.ToTable("Comments");
+                });
+
             modelBuilder.Entity("Modwana.Domain.Models.Role", b =>
                 {
                     b.Property<string>("Id")
@@ -326,6 +361,13 @@ namespace Modwana.Persistance.Migrations.Sqlite
                     b.HasOne("Modwana.Domain.Models.Author", "Author")
                         .WithMany()
                         .HasForeignKey("AuthorId");
+                });
+
+            modelBuilder.Entity("Modwana.Domain.Models.Comment", b =>
+                {
+                    b.HasOne("Modwana.Domain.Models.Blog", "Blog")
+                        .WithMany()
+                        .HasForeignKey("BlogId");
                 });
 
             modelBuilder.Entity("Modwana.Domain.Models.Role", b =>

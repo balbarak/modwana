@@ -2271,7 +2271,7 @@ textarea.form-control {
 
 .was-validated textarea.form-control:invalid, textarea.form-control.is-invalid {
     padding-left: 2.25rem;
-    background-position: top calc(2.25rem / 4) right calc(2.25rem / 4)
+    background-position: top calc(2.25rem / 4) left calc(2.25rem / 4)
 }
 
 .custom-select.is-invalid, .was-validated .custom-select:invalid {

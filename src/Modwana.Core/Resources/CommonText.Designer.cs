@@ -277,6 +277,15 @@ namespace Modwana.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to التعليقات.
+        /// </summary>
+        public static string Comments {
+            get {
+                return ResourceManager.GetString("Comments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to اكتمال.
         /// </summary>
         public static string Complete {
@@ -565,6 +574,15 @@ namespace Modwana.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to اكتب تعليق.
+        /// </summary>
+        public static string LeaveReply {
+            get {
+                return ResourceManager.GetString("LeaveReply", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to دخول.
         /// </summary>
         public static string Login {
@@ -732,6 +750,15 @@ namespace Modwana.Core.Resources {
         public static string PostalCode {
             get {
                 return ResourceManager.GetString("PostalCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ارسل التعليق.
+        /// </summary>
+        public static string PostComment {
+            get {
+                return ResourceManager.GetString("PostComment", resourceCulture);
             }
         }
         

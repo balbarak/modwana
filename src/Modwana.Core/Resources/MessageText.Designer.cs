@@ -131,5 +131,14 @@ namespace Modwana.Core.Resources {
                 return ResourceManager.GetString("PleaseFixTheFollowingErrors", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to لا يمكنك حذف هذا الحساب, بسبب انه حساب رئيسي للنظام.
+        /// </summary>
+        public static string YouCannotDeleteThisAccounts {
+            get {
+                return ResourceManager.GetString("YouCannotDeleteThisAccounts", resourceCulture);
+            }
+        }
     }
 }

@@ -98,21 +98,23 @@
                                         @CommonText.ChangePassword
                                     </button>
                                 </div>
-                                <div class="col-auto py-1 px-1">
+                                @if (!item.IsMain)
+                                {
+                                    <div class="col-auto py-1 px-1">
+                                        <a class="btn btn-sm btn-danger m-btn m-btn--icon"
+                                           asp-ajax="true"
+                                           asp-confirm="true"
+                                           asp-action="delete"
+                                           asp-controller="user"
+                                           asp-ajax-success-method="updateListFromDiv('#list');"
+                                           asp-route-id="@item.Id"
+                                           asp-ajax-block="#list">
+                                            <i class="fa fa-trash"></i>
+                                            @CommonText.Delete
+                                        </a>
 
-                                    <a class="btn btn-sm btn-danger m-btn m-btn--icon"
-                                       asp-ajax="true"
-                                       asp-confirm="true"
-                                       asp-action="delete"
-                                       asp-controller="user"
-                                       asp-ajax-success-method="updateListFromDiv('#list');"
-                                       asp-route-id="@item.Id"
-                                       asp-ajax-block="#list">
-                                        <i class="fa fa-trash"></i>
-                                        @CommonText.Delete
-
-                                    </a>
-                                </div>
+                                    </div>
+                                  }
                             </div>
                         </td>
                     </tr>

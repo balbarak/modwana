@@ -142,4 +142,7 @@
   <data name="AccountLocked" xml:space="preserve">
     <value>تم تعطيل الحساب الرجاء المحاولة بعد فترة</value>
   </data>
+  <data name="YouCannotDeleteThisAccounts" xml:space="preserve">
+    <value>لا يمكنك حذف هذا الحساب, بسبب انه حساب رئيسي للنظام</value>
+  </data>
 </root>

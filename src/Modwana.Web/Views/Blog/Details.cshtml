@@ -54,17 +54,69 @@
     </div>
 </div>
 
+<div class="card blog" id="comment-card">
+    <div class="card-body">
+        <h4 class="card-title">
+            @CommonText.LeaveReply
+        </h4>
+        <form id="comment-form"
+              method="post"
+              asp-ajax="true"
+              asp-ajax-success-method="updateListFromDiv('#comment-list');clearFromData('#comment-form')"
+              asp-action="add"
+              asp-controller="comment"
+              asp-ajax-block="#comment-card">
+
+            <partial name="~/Views/Comment/_Form.cshtml" model="new CommentViewModel(Model.Id)" />
+
+            <hr />
+
+            <button type="submit" class="btn btn-primary btn-sm">
+                @CommonText.PostComment
+            </button>
+        </form>
+    </div>
+</div>
+
+<div class="card blog">
+    <div class="card-body">
+        <h4 class="card-title">
+            @CommonText.Comments
+        </h4>
+        <hr/>
+        <div id="comment-list"></div>
+    </div>
+</div>
+
 @if (User.Identity.IsAuthenticated)
 {
     <div class="card">
         <div class="card-body">
-            <a asp-action="edit" asp-route-id="@Model.Id" class="btn btn-primary btn-sm">
+            <a asp-action="edit" asp-route-id="@Model.Id" class="btn btn-warning btn-sm">
+                <i class="fa fa-edit"></i>
                 @CommonText.Edit
             </a>
+
         </div>
     </div>
 }
 
 @section scripts{
     <script src="~/prism/prism.js"></script>
+
+    <script type="text/javascript">
+
+        $(function () {
+
+            updateComments();
+        });
+
+        function updateComments() {
+
+            var url = '@Url.Action("List", "Comment", new { BlogId = Model.Id })';
+
+            updateContainer(url, "#comment-list")
+        }
+
+    </script>
 }

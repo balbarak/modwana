@@ -168,6 +168,41 @@ namespace Modwana.Persistance.Migrations.Postgresql
                     b.ToTable("Blogs");
                 });
 
+            modelBuilder.Entity("Modwana.Domain.Models.Comment", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("character varying(128)")
+                        .HasMaxLength(128);
+
+                    b.Property<string>("BlogId")
+                        .HasColumnType("character varying(128)");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("text");
+
+                    b.Property<string>("IPAddress")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Text")
+                        .HasColumnType("text");
+
+                    b.Property<string>("UserAgent")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BlogId");
+
+                    b.ToTable("Comments");
+                });
+
             modelBuilder.Entity("Modwana.Domain.Models.Role", b =>
                 {
                     b.Property<string>("Id")
@@ -331,6 +366,13 @@ namespace Modwana.Persistance.Migrations.Postgresql
                     b.HasOne("Modwana.Domain.Models.Author", "Author")
                         .WithMany()
                         .HasForeignKey("AuthorId");
+                });
+
+            modelBuilder.Entity("Modwana.Domain.Models.Comment", b =>
+                {
+                    b.HasOne("Modwana.Domain.Models.Blog", "Blog")
+                        .WithMany()
+                        .HasForeignKey("BlogId");
                 });
 
             modelBuilder.Entity("Modwana.Domain.Models.Role", b =>

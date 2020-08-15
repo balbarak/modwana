@@ -46,6 +46,8 @@ namespace Modwana.Application
             services.AddTransient<IModwanaUserManager<User>, ModwanaUserManager>();
 
             services.AddTransient<IBlogService, BlogService>();
+
+            services.AddTransient<ICommentService, CommentService>();
         }
     }
 }

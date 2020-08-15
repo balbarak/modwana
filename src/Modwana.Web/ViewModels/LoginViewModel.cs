@@ -11,6 +11,7 @@ namespace Modwana.Web.ViewModels
     {
         [Display(Name = nameof(CommonText.Email), ResourceType = typeof(CommonText))]
         [Required(ErrorMessageResourceName = nameof(ValidationText.Required), ErrorMessageResourceType = typeof(ValidationText))]
+        [EmailAddress(ErrorMessageResourceName = nameof(ValidationText.Email), ErrorMessageResourceType = typeof(ValidationText))]
         public string Email { get; set; }
 
         [Display(Name = nameof(CommonText.Password), ResourceType = typeof(CommonText))]

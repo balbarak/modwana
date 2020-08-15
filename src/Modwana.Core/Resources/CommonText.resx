@@ -423,4 +423,13 @@
   <data name="ChangePassword" xml:space="preserve">
     <value>تغيير كلمة المرور</value>
   </data>
+  <data name="LeaveReply" xml:space="preserve">
+    <value>اكتب تعليق</value>
+  </data>
+  <data name="PostComment" xml:space="preserve">
+    <value>ارسل التعليق</value>
+  </data>
+  <data name="Comments" xml:space="preserve">
+    <value>التعليقات</value>
+  </data>
 </root>

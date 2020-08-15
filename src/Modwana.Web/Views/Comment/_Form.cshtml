@@ -1,0 +1,28 @@
+﻿@model CommentViewModel
+
+<input type="hidden" asp-for="BlogId"/>
+
+<div class="form-group">
+    <textarea rows="4" asp-for="Text" placeholder="@CommonText.LeaveReply ..." class="form-control"></textarea>
+    <span asp-validation-for="Text"></span>
+</div>
+
+<div class="row">
+    <div class="col-4">
+        <div class="form-group">
+            <input type="text" class="form-control" asp-for="Name" placeholder="@CommonText.Name ..." />
+            <span asp-validation-for="Name"></span>
+
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-4">
+        <div class="form-group">
+            <input type="text" class="form-control" asp-for="Email" placeholder="@CommonText.Email ..." />
+            <span asp-validation-for="Email"></span>
+
+        </div>
+    </div>
+</div>

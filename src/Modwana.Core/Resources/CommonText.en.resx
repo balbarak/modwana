@@ -417,4 +417,13 @@
   <data name="ChangePassword" xml:space="preserve">
     <value>Change Password</value>
   </data>
+  <data name="LeaveReply" xml:space="preserve">
+    <value>Leave a Reply</value>
+  </data>
+  <data name="PostComment" xml:space="preserve">
+    <value>Post Comment</value>
+  </data>
+  <data name="Comments" xml:space="preserve">
+    <value>Comments</value>
+  </data>
 </root>
