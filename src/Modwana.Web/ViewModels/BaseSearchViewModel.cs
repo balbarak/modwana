@@ -16,6 +16,7 @@ namespace Modwana.Web.ViewModels
 
         public virtual SearchCriteria<TModel> ToSearchModel()
         {
+            
             return this;
         }
 

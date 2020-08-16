@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssemblyName>ModwanaApp</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
@@ -23,7 +24,7 @@
     <ProjectReference Include="..\Modwana.Persistance\Modwana.Persistance.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Database\" />
+    <Folder Include="Database\*" />
     <Folder Include="wwwroot\fonts\" />
   </ItemGroup>
   <ItemGroup>
@@ -31,6 +32,11 @@
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Database\.gitkeep">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 
