@@ -49,4 +49,3 @@ It is over engineered for simple blog !
 
 It can be extended for whatever purpose 
 
-<
