@@ -65,10 +65,12 @@ namespace Modwana.Persistance.Migrations.Sqlite
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT")
+                        .HasMaxLength(128);
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT")
+                        .HasMaxLength(128);
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("TEXT");
@@ -87,10 +89,12 @@ namespace Modwana.Persistance.Migrations.Sqlite
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
                     b.Property<string>("UserId")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT")
+                        .HasMaxLength(128);
 
                     b.Property<string>("RoleId")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT")
+                        .HasMaxLength(128);
 
                     b.HasKey("UserId", "RoleId");
 
@@ -102,13 +106,16 @@ namespace Modwana.Persistance.Migrations.Sqlite
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
                     b.Property<string>("UserId")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT")
+                        .HasMaxLength(128);
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT")
+                        .HasMaxLength(128);
 
                     b.Property<string>("Name")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT")
+                        .HasMaxLength(128);
 
                     b.Property<string>("Value")
                         .HasColumnType("TEXT");
@@ -201,7 +208,8 @@ namespace Modwana.Persistance.Migrations.Sqlite
             modelBuilder.Entity("Modwana.Domain.Models.Role", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT")
+                        .HasMaxLength(128);
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -209,11 +217,11 @@ namespace Modwana.Persistance.Migrations.Sqlite
 
                     b.Property<string>("Name")
                         .HasColumnType("TEXT")
-                        .HasMaxLength(256);
+                        .HasMaxLength(128);
 
                     b.Property<string>("NormalizedName")
                         .HasColumnType("TEXT")
-                        .HasMaxLength(256);
+                        .HasMaxLength(128);
 
                     b.HasKey("Id");
 
@@ -243,7 +251,7 @@ namespace Modwana.Persistance.Migrations.Sqlite
 
                     b.Property<string>("Email")
                         .HasColumnType("TEXT")
-                        .HasMaxLength(256);
+                        .HasMaxLength(128);
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("INTEGER");
@@ -259,11 +267,11 @@ namespace Modwana.Persistance.Migrations.Sqlite
 
                     b.Property<string>("NormalizedEmail")
                         .HasColumnType("TEXT")
-                        .HasMaxLength(256);
+                        .HasMaxLength(128);
 
                     b.Property<string>("NormalizedUserName")
                         .HasColumnType("TEXT")
-                        .HasMaxLength(256);
+                        .HasMaxLength(128);
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("TEXT");
@@ -282,7 +290,7 @@ namespace Modwana.Persistance.Migrations.Sqlite
 
                     b.Property<string>("UserName")
                         .HasColumnType("TEXT")
-                        .HasMaxLength(256);
+                        .HasMaxLength(128);
 
                     b.HasKey("Id");
 

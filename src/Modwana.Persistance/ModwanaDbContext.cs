@@ -66,6 +66,36 @@ namespace Modwana.Persistance
                 .HasMany(a => a.Comments)
                 .WithOne(a => a.Blog)
                 .OnDelete(DeleteBehavior.Cascade);
+
+
+            builder.Entity<User>(entity => {
+                entity.Property(m => m.Email).HasMaxLength(128);
+                entity.Property(m => m.NormalizedEmail).HasMaxLength(128);
+                entity.Property(m => m.NormalizedUserName).HasMaxLength(128);
+                entity.Property(m => m.UserName).HasMaxLength(128);
+            });
+            
+            builder.Entity<Role>(entity => {
+                entity.Property(m => m.Name).HasMaxLength(128);
+                entity.Property(m => m.NormalizedName).HasMaxLength(128);
+            });
+
+            builder.Entity<IdentityUserLogin<string>>(entity =>
+            {
+                entity.Property(m => m.LoginProvider).HasMaxLength(128);
+                entity.Property(m => m.ProviderKey).HasMaxLength(128);
+            });
+            builder.Entity<IdentityUserRole<string>>(entity =>
+            {
+                entity.Property(m => m.UserId).HasMaxLength(128);
+                entity.Property(m => m.RoleId).HasMaxLength(128);
+            });
+            builder.Entity<IdentityUserToken<string>>(entity =>
+            {
+                entity.Property(m => m.UserId).HasMaxLength(128);
+                entity.Property(m => m.LoginProvider).HasMaxLength(128);
+                entity.Property(m => m.Name).HasMaxLength(128);
+            });
         }
 
         public async Task EnsureSeeding()

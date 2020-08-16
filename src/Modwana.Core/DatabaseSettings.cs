@@ -10,7 +10,8 @@ namespace Modwana.Core
         {
             Sqlite = 1,
             Postgress = 2,
-            MSSQL = 3
+            MSSQL = 3,
+            MySql = 4
         }
 
         public string Host { get; set; }

@@ -32,7 +32,10 @@ namespace Modwana.Application
                 
                 DatabaseSettings.DatabaseType.MSSQL => 
                 services.AddDbContext<ModwanaDbContext, SqlDbContext>(ServiceLifetime.Transient),
-                
+
+                DatabaseSettings.DatabaseType.MySql =>
+                services.AddDbContext<ModwanaDbContext, MySqlDbContext>(ServiceLifetime.Transient),
+
                 _ =>
                 services.AddDbContext<ModwanaDbContext, SqliteDbContext>(ServiceLifetime.Transient),
             };

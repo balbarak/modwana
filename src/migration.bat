@@ -10,6 +10,8 @@ dotnet ef migrations add %NAME% --project "../Modwana.Persistance" --context Sql
 
 dotnet ef migrations add %NAME% --project "../Modwana.Persistance" --context PostgreSqlDbContext --output-dir "../Modwana.Persistance/Migrations/Postgresql"
 
+dotnet ef migrations add %NAME% --project "../Modwana.Persistance" --context MySqlDbContext --output-dir "../Modwana.Persistance/Migrations/MySql"
+
 
 
 

@@ -5,14 +5,17 @@ using System.Text;
 
 namespace Modwana.Persistance
 {
-    public class PostgreSqlDbContext : ModwanaDbContext
+    public class MySqlDbContext : ModwanaDbContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (optionsBuilder.IsConfigured)
                 return;
 
-            optionsBuilder.UseNpgsql($"Host={Settings.Host};Database={Settings.Database};Username={Settings.User};Password={Settings.Password};Port={Settings.Port};Pooling=true");
+
+            var con = $"server={Settings.Host};database={Settings.Database};user={Settings.User};password={Settings.Password}";
+
+            optionsBuilder.UseMySQL(con);
         }
     }
 }
