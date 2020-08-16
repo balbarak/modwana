@@ -19,14 +19,15 @@ Make sure you have dotnet installed by running the following command
 
 `dotnet --version`
 
-Clone the repo
+* Clone the repo
 
 `git clone https://github.com/balbarak/modwana.git`
 
-Go to web Path
+* Go to web Path
+
 `cd /modwana/src/Modwana.Web/`
 
-run the app
+* Run the app
 
 `dotnet run`
 
