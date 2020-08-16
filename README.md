@@ -40,7 +40,7 @@ Modwana app use Sqlite as default database, if you want to change the database o
 
 `src/Modwana.Web/appsettings.json`
 
-and make the changes suite for you
+and make the changes that, suite for you
 ```js
   "DatabaseSettings": {
     "UseConnectionString": false,
