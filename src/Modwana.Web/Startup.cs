@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Security.Principal;
 using System.Threading.Tasks;
+using GitVersion;
+using GitVersion.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -14,6 +17,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using Modwana.Application;
 using Modwana.Application.Helpers;
 using Modwana.Application.Identities;
@@ -21,6 +25,7 @@ using Modwana.Core;
 using Modwana.Core.Interfaces;
 using Modwana.Domain.Models;
 using Modwana.Persistance;
+using Modwana.Web.Models;
 
 namespace Modwana.Web
 {
@@ -58,6 +63,7 @@ namespace Modwana.Web
 
             services.AddTransient<IPrincipal>((provider) => provider.GetService<IHttpContextAccessor>().HttpContext?.User);
 
+            ConfigureGitVersion(services);
             
             ServiceLocator.Configure(services);
         }
@@ -129,6 +135,37 @@ namespace Modwana.Web
             var requestProvider = new RouteDataRequestCultureProvider();
             options.RequestCultureProviders.Insert(0, requestProvider);
             return options;
+        }
+
+        private void ConfigureGitVersion(IServiceCollection services)
+        {
+            services.AddModule(new GitVersionCoreModule());
+
+            services.AddSingleton(sp =>
+            {
+                var workingDir = Directory.GetCurrentDirectory();
+                
+                workingDir = workingDir.Replace("\\", "/");
+
+                var index = workingDir.IndexOf(@"/src/");
+
+                if (index > 0)
+                    workingDir = workingDir.Substring(0, index + 4);
+
+                var gitVersionOptions = new GitVersionOptions
+                {
+                    Settings =
+                            {
+                                NoFetch = false,
+                                NoCache = true,
+                            },
+                    WorkingDirectory = workingDir,
+                };
+
+                return Options.Create(gitVersionOptions);
+            });
+
+            services.AddTransient<IAppVersion, AppVersion>();
         }
     }
 }
