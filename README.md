@@ -31,9 +31,28 @@ Make sure you have dotnet installed by running the following command
 
 `dotnet run`
 
-now your app lisentning
+now your app is runing ...
 
 open the browser at `http://localhost:5010`
+
+### Databse Configuration
+Modwana app use Sqlite as default database, if you want to change the database open
+
+`src/Modwana.Web/appsettings.json`
+
+and make the changes suite for you
+```js
+  "DatabaseSettings": {
+    "UseConnectionString": false,
+    "Type": 1, // 1=Sqlite, 2=Postgress, 3=MSSQL, 4=MySql
+    "Host": "127.0.0.1",
+    "Port": 3306, // Postgree=5432, MySql=3306
+    "Database": "ModwanaDb",
+    "User": "balbarak",
+    "Password": "1122",
+    "FilePath": "Database/ModwanaSqlite.db"
+  },
+```
 
 
 ## Architecture 
