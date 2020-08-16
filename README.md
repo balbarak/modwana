@@ -35,6 +35,12 @@ now your app is runing ...
 
 open the browser at `http://localhost:5010`
 
+### Login Information
+
+user: admin@admin.com
+
+pass: 1122
+
 ### Databse Configuration
 Modwana app use Sqlite as default database, if you want to change the database open
 
