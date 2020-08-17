@@ -6,6 +6,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Database\ModwanaSqlite.db" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Database\ModwanaSqlite.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     
     <PackageReference Include="GitVersion.Core" Version="5.3.7" />
 
@@ -24,7 +34,6 @@
     <ProjectReference Include="..\Modwana.Persistance\Modwana.Persistance.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Database\*" />
     <Folder Include="wwwroot\fonts\" />
   </ItemGroup>
   <ItemGroup>
@@ -33,11 +42,7 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <None Update="Database\.gitkeep">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
+
 
 
 
