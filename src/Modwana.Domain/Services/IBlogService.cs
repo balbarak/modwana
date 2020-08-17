@@ -16,6 +16,7 @@ namespace Modwana.Domain.Services
         Task Delete(string id);
 
         Task<SearchResult<Blog>> Search(SearchCriteria<Blog> search);
+
         Task<Blog> GetById(string id);
     }
 }
